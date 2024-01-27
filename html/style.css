@@ -1,0 +1,146 @@
+    footer {
+        background-color: #574747;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .navbar {
+        background-color: #574747;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgb(138, 63, 63);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        align-self: center;
+        justify-content: center;
+    }
+    
+    main {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .team-member {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        margin: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .member-photo {
+        width: auto;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    .member-details {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .nav-link {
+        width: 5vw;
+    }
+    
+    .featured-products,
+    .new-arrivals {
+        margin-bottom: 40px;
+    }
+    
+    h2 {
+        color: #333;
+    }
+    
+    .product {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    
+    .product img {
+        width: auto;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    .product h3,
+    .product p {
+        text-align: center;
+        margin: 10px 0;
+    }
+    
+    button {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #45a049;
+    }
+    
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    li {
+        display: inline;
+        margin-right: 20px;
+    }
+    
+    a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
