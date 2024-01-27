@@ -172,7 +172,9 @@
     input[type="submit"]:hover {
         background-color: #45a049;
     }
-
+    .login {
+        background-color: blanchedalmond;
+    }
 
     .fab {
         font-size: 80px;
@@ -186,6 +188,7 @@
         animation: spinAndScale 0.5s infinite linear;
         animation: glow 1.5s infinite alternate;
     }
+
 
     @keyframes spinAndScale{
         0% {
