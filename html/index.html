@@ -13,49 +13,49 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="index.html">Kezdőlap</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <nav class=" navbar navbar-icon-top navbar-expand-lg navbar-dark ">
+            <a class="navbar-brand " href="index.html ">Kezdőlap</a>
+            <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarSupportedContent " aria-controls="navbarSupportedContent " aria-expanded="false " aria-label="Toggle navigation ">
+                <span class="navbar-toggler-icon "></span>
               </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse " id="navbarSupportedContent ">
+                <ul class="navbar-nav mr-auto ">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="rolunk.html">
-                            <i class="fa fa-envelope-o">
-                  <span class="badge badge-danger"></span>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="rolunk.html ">
+                            <i class="fa fa-envelope-o ">
+                  <span class="badge badge-danger "></span>
                 </i> Rólunk
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="hirdetesek.html">
-                            <i class="fa fa-envelope-o">
-                  <span class="badge badge-warning"></span>
+                    <li class="nav-item ">
+                        <a class="nav-link disabled " href="hirdetesek.html ">
+                            <i class="fa fa-envelope-o ">
+                  <span class="badge badge-warning "></span>
                 </i> Hirdetések
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="forum.html">
-                            <i class="fa fa-envelope-o">
-                  <span class="badge badge-warning"></span>
+                    <li class="nav-item ">
+                        <a class="nav-link disabled " href="forum.html ">
+                            <i class="fa fa-envelope-o ">
+                  <span class="badge badge-warning "></span>
                 </i> Fórum
                         </a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <a class="nav-link" href="kosar.html">
-                            <i class="fa fa-bell">
-                  <span class="badge badge-info"></span>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="kosar.html ">
+                            <i class="fa fa-bell ">
+                  <span class="badge badge-info "></span>
                 </i> Kosár
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="fiok.html">
-                            <i class="fa fa-globe">
-                  <span class="badge badge-success"></span>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="fiok.html ">
+                            <i class="fa fa-globe ">
+                  <span class="badge badge-success "></span>
                 </i> Fiók
                         </a>
                     </li>
@@ -64,11 +64,13 @@
             </div>
         </nav>
     </header>
-    <form action="/search" method="get">
-        <label for="search">Keresés:</label>
-        <input type="text" id="search" name="search" placeholder="Keresés...">
-        <button type="submit">Keresés</button>
-    </form>
+    <div class="search-container">
+        <form action="/search" method="get">
+            <label for="search-bar">Keresés:</label>
+            <input type="text" id="search-bar" name="q" placeholder="Keresés">
+            <input type="submit" value="Search">
+        </form>
+    </div>
     <footer>
         &copy;Az oldal a Rosszfogás tulajdona. Minden jog fenntartva.
     </footer>
