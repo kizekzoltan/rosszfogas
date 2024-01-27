@@ -70,6 +70,7 @@
         border-radius: 8px;
         overflow: hidden;
         margin-bottom: 20px;
+        background-color: blanchedalmond;
     }
     
     .product img {
@@ -121,6 +122,7 @@
         width: 100%;
         border-collapse: collapse;
         margin-bottom: 20px;
+        background-color: blanchedalmond;
     }
     
     th,
@@ -164,4 +166,8 @@
     
     input[type="submit"]:hover {
         background-color: #45a049;
+    }
+    
+    .login {
+        background-color: blanchedalmond;
     }
