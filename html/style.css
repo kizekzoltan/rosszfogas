@@ -22,17 +22,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-    }
-    
-    input[type="text"] {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        align-self: center;
-        justify-content: center;
+        background-image: url('img/vityanokia.jpg');
+        background-size: 15%;
     }
     
     main {
@@ -50,6 +41,8 @@
         border: 1px solid #ccc;
         border-radius: 8px;
         overflow: hidden;
+        background-color: blanchedalmond;
+        padding-top: 50px;
     }
     
     .member-photo {
@@ -61,10 +54,6 @@
     .member-details {
         padding: 10px;
         text-align: center;
-    }
-    
-    .nav-link {
-        width: 5vw;
     }
     
     .featured-products,
@@ -143,4 +132,36 @@
     
     th {
         background-color: #f2f2f2;
+    }
+    
+    .search-container {
+        max-width: 400px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-self: center;
+    }
+    
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+    
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #45a049;
     }
