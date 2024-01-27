@@ -1,3 +1,4 @@
+    
     footer {
         background-color: #574747;
         color: #fff;
@@ -22,8 +23,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        background-image: url('img/vityanokia.jpg');
-        background-size: 15%;
+        background-image: url(img/4580069-pattern-black.png);
+        background-repeat: no-repeat;
+        background-size:cover;
     }
     
     main {
@@ -42,13 +44,18 @@
         border-radius: 8px;
         overflow: hidden;
         background-color: blanchedalmond;
-        padding-top: 50px;
+        padding-top: 25px;
     }
-    
+    .team-member:hover{
+        transition: transform 20s ease-in-out;
+        transform: rotate(14000deg);
+        animation: spinAndScale 30s infinite linear;
+    }
     .member-photo {
         width: auto;
         height: auto;
         object-fit: cover;
+        border-radius: 10px;
     }
     
     .member-details {
@@ -164,4 +171,38 @@
     
     input[type="submit"]:hover {
         background-color: #45a049;
+    }
+
+
+    .fab {
+        font-size: 80px;
+        margin: 20px;
+    }
+    .fab:hover{
+        transition: transform 5s ease-in-out;
+        transform: rotate(22720deg);
+        color: red;
+        
+        animation: spinAndScale 0.5s infinite linear;
+        animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes spinAndScale{
+        0% {
+            transform: scale(1) rotate(0deg);
+        }
+        50% {
+            transform: scale(3) rotate(180deg);
+        }
+        100% {
+            transform: scale(1) rotate(360deg);
+        }
+    }
+    @keyframes glow {
+        0% {
+            box-shadow: 0 0 10px #fff; /* Initial shadow */
+        }
+        50% {
+            box-shadow: 200px 200px 200px 200px #ff1e00; /* Glowing shadow */
+        }
     }
