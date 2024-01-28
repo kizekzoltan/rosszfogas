@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="forum.html">
+                        <a class="nav-link disabled" href="forum.html" target="_blank">
                             <i class="fa fa-envelope-o">
                   <span class="badge badge-warning"></span>
                 </i> Fórum
@@ -64,25 +64,71 @@
             </div>
         </nav>
     </header>
-    <form action="index.html" method="get">
-        <h2>Webshop regisztráció</h2>
-        <label for="username">Felhasználónév:</label>
-        <input type="text" id="username" name="username" required>
+    <div class="login">
+        <form id="registrationForm" onsubmit="validateForm(event)">
+            <label for="username">Felhasználónév:</label>
+            <input type="text" id="username" name="username" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="password">Jelszó:</label>
-        <input type="password" id="password" name="password" required>
+            <label for="name">Név:</label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="confirm_password">Jelszó megerősítése:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
+            <label for="password">Jelszó:</label>
+            <input type="password" id="password" name="password" required>
 
-        <button type="submit" href="index.html">Regisztráció</button>
-    </form>
+            <label for="confirmPassword">Jelszó megerősítése:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+            <label for="country">Ország:</label>
+            <select id="country" name="country" required>
+                <option value="" disabled selected>Válassza ki az országát</option>
+                <!-- JavaScript will populate options dynamically -->
+            </select>
+
+            <label for="city">Város:</label>
+            <input type="text" id="city" name="city" required>
+
+            <label for="street">Utca:</label>
+            <input type="text" id="street" name="street" required>
+
+            <label for="streetNumber">Házszám:</label>
+            <input type="text" id="streetNumber" name="streetNumber" required>
+
+            <button type="submit">Regisztráció</button>
+        </form>
+    </div>
     <footer>
         &copy;Az oldal a Rosszfogás tulajdona. Minden jog fenntartva.
     </footer>
+    <script>
+        // Dummy array of countries for demonstration purposes
+        const countries = [
+            "Afghanistan", "Albania", "Algeria", /* ... add all countries ... */
+            "Zimbabwe"
+        ];
+
+        // Populate the country dropdown
+        const countryDropdown = document.getElementById('country');
+        countries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country;
+            option.text = country;
+            countryDropdown.add(option);
+        });
+
+        function validateForm(event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Password and Confirm Password do not match');
+                event.preventDefault(); // Prevent form submission
+            }
+            // Add more validation logic as needed
+        }
+    </script>
 </body>
 
 </html>

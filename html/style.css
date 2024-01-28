@@ -38,19 +38,26 @@
     .team-member {
         display: flex;
         flex-direction: column;
-        width: 300px;
+        width: 100px;
         margin: 20px;
         border: 1px solid #ccc;
         border-radius: 8px;
         overflow: hidden;
-        background-color: blanchedalmond;
+        background-color: rgb(188, 184, 179);
         padding-top: 25px;
+        transition: 0.3;
     }
-    .team-member:hover{
-        transition: transform 20s ease-in-out;
+
+
+    
+    /*    transition: transform 20s ease-in-out;
         transform: rotate(14000deg);
         animation: spinAndScale 30s infinite linear;
-    }
+        */
+    .team-member:not(:hover){
+    filter: grayscale(30%);
+    transition: 0.3s;
+}
     .member-photo {
         width: auto;
         height: auto;
@@ -59,7 +66,7 @@
     }
     
     .member-details {
-        padding: 10px;
+        padding: 5%;
         text-align: center;
     }
     
@@ -77,6 +84,7 @@
         border-radius: 8px;
         overflow: hidden;
         margin-bottom: 20px;
+        background-color: blanchedalmond;
     }
     
     .product img {
@@ -128,6 +136,7 @@
         width: 100%;
         border-collapse: collapse;
         margin-bottom: 20px;
+        background-color: blanchedalmond;
     }
     
     th,
@@ -172,6 +181,10 @@
     input[type="submit"]:hover {
         background-color: #45a049;
     }
+ .login {
+   background-color: blanchedalmond;
+}
+
     .login {
         background-color: blanchedalmond;
     }
@@ -179,17 +192,20 @@
     .fab {
         font-size: 80px;
         margin: 20px;
+        color: #574747;
+        transition: transform 600ms ease-in-out, color 600ms ease-in-out;
     }
     .fab:hover{
-        transition: transform 5s ease-in-out;
-        transform: rotate(22720deg);
-        color: red;
+        transition: transform 600ms ease-in-out, color 600ms ease-in-out;
+        transform: rotate(20deg);
+        color: rgb(68, 123, 199);
         
+        /*
         animation: spinAndScale 0.5s infinite linear;
-        animation: glow 1.5s infinite alternate;
+        animation: glow 1.5s infinite alternate;*/
     }
 
-
+/*
     @keyframes spinAndScale{
         0% {
             transform: scale(1) rotate(0deg);
@@ -201,11 +217,12 @@
             transform: scale(1) rotate(360deg);
         }
     }
+    *//*
     @keyframes glow {
         0% {
-            box-shadow: 0 0 10px #fff; /* Initial shadow */
+            box-shadow: 0 0 10px #fff;
         }
         50% {
-            box-shadow: 200px 200px 200px 200px #ff1e00; /* Glowing shadow */
+            box-shadow: 200px 200px 200px 200px #ff1e00;
         }
-    }
+    }*/
