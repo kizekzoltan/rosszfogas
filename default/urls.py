@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     # Views
-    path('', views.index_view, name="fooldal"),
-    path('rolunk/', views.about_us_view, name="roulnk"),
-    path('forum/', views.forum_view, name="forum"),
+    path('', views.shop, name="shop"),
+    path('kosar/', views.kosar, name="kosar"),
+    path('checkout/', views.checkout, name="checkout"),
 ]

@@ -5,13 +5,14 @@
 from django.shortcuts import render
 
 # - Views
-def index_view(request):
-    return render(request, "default/fooldal.html")
+def shop(request):
+    context = {}
+    return render(request, 'default/shop.html', context)
 
+def kosar(request):
+    context = {}
+    return render(request, 'default/kosar.html', context)
 
-def about_us_view(request):
-    return render(request, "default/rolunk.html")
-
-
-def forum_view(request):
-    return render(request, "default/forum.html")
+def checkout(request):
+    context = {}
+    return render(request, 'default/checkout.html', context)
