@@ -45,7 +45,6 @@ h1,h2,h3,h4,h5,h6{
 
 #cart-total{
 	display: block;
-	text-align: center;
 	color:#fff;
 	background-color: red;
 	width: 20px;
