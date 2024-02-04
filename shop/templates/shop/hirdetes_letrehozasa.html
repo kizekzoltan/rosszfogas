@@ -5,10 +5,79 @@
 
 {% block body %}
     
-    {# Ide írjátok a HTML kódot amit a body-n belül szeretnétek látni #}
+    <!-- create_advert.html -->
+<div class="center-container">
+    <form method="post" action="{% url 'hirdetes_letrehozasa' %}" enctype="multipart/form-data">
+        <!-- Basic Information Section -->
+        <div class="form-section">
+            <label for="name">Név:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="price">Ár:</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="address">Feladó címe:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="brand">Márka:</label>
+            <input type="text" id="brand" name="brand" required>
+        </div>
+
+        <!-- Details Section -->
+        <div class="form-section">
+            <label for="category">Kategória:</label>
+            <select id="category" name="category" required>
+                <option value="category1">Háztartáso gép</option>
+                <option value="category2">Elektronikai eszköz</option>
+                <option value="category2">Állat</option>
+                <option value="category2">Étel</option>
+                <option value="category2">Ház</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <label for="quality">Quality:</label>
+            <select id="quality" name="quality" required>
+                <option value="excellent">Új</option>
+                <option value="good">Bontatlan</option>
+                <option value="excellent">Használt</option>
+                <option value="excellent">Nem működő</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <label for="description">Leírás:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+
+        <!-- Image Section -->
+        <div class="form-section">
+            <label for="images">Kép hozzáadás:</label>
+            <input type="file" id="termek_kep" name="images" accept="image/*" multiple>
+
+            <!-- Display uploaded images here if needed -->
+            <div id="image-preview"></div>
+        </div>
+
+        <!-- Agreements Section -->
+        <div class="form-section">
+            <input type="checkbox" id="agreement" name="agreement" required>
+            <label for="agreement">Elolvastam és hozzájárulok a felhasználói feltételekhez</label>
+        </div>
+
+        <!-- Publish Button -->
+        <div class="form-section">
+            <button type="submit">Feladás</button>
+        </div>
+    </form>
+</div>
 
 {% endblock %}
 
 {% block scripts %}
-    {# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+imgInp.onchange = evt = {
+    const [file] = imgInp.files
+    if (file) {
+      termek_kep.src = URL.createObjectURL(file)
+    }
+  }   
+{# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
 {% endblock %}
