@@ -3,10 +3,12 @@
     @package rosszfogas
 """
 from django.shortcuts import render
+from .models import *
 
 # - Views
 def shop(request):
-    context = {}
+    products = Product.objects.all()
+    context = {'products':products}
     return render(request, 'default/shop.html', context)
 
 def kosar(request):

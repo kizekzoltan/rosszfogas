@@ -16,10 +16,20 @@ class Product(models.Model):
     price = models.FloatField()
     description = models.TextField()
     available = models.BooleanField(default=True, null=True, blank=True)
-    # image = models.ImageField(upload_to='default/images/')
+    image = models.ImageField(null=True, blank=True, upload_to='default/images/')
 
     def __str__(self):
         return self.name
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
+
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
