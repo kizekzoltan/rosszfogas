@@ -48,15 +48,15 @@ h6 {
     margin-right: 30vh;
 }
 
-#cart-total {
-    display: block;
-    text-align: center;
-    color: #fff;
-    background-color: red;
-    width: 20px;
-    height: 25px;
-    border-radius: 50%;
-    font-size: 14px;
+#cart-total{
+	display: block;
+	color:#fff;
+  text-align: center;
+	background-color: red;
+	width: 20px;
+	height: 25px;
+	border-radius: 50%;
+	font-size: 14px;
 }
 
 .col-lg-4,
