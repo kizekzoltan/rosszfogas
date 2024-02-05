@@ -39,13 +39,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'shop' %}">
+                        <a class="nav-link active" href="{% url 'fiok' %}">
                             <i class='bx bxs-conversation'></i>
                             <strong>Fórum</strong>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'shop' %}">
+                        <a class="nav-link active" href="{% url 'hirdetes_letrehozasa' %}">
                             <i class='bx bx-question-mark'></i>
                             <strong>GY.I.K.</strong>
                         </a>
@@ -53,9 +53,9 @@
                 </ul>
     
                 <div class="form-inline my-2 my-lg-0">
-                    <a href="#" class="btn btn-primary btn-rounded custom-btn">Regisztráció</a>
+                    <a href="#" class="btn btn-primary btn-rounded custom-btn" href="{% url 'bejelentkezes' %}">Regisztráció</a>
                     <span class="vertical-line"></span>
-                    <a href="#" class="btn btn-primary btn-rounded custom-btn">Bejelentkezés</a>
+                    <a href="#" class="btn btn-primary btn-rounded custom-btn" href="{% url 'regisztracio' %}">Bejelentkezés</a>
                     
                     <a href="{% url 'kosar' %}">
                         <img id="cart-icon" src="{% static 'images/kosar.png' %}">
