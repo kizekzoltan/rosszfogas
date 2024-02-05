@@ -1,5 +1,6 @@
 {% extends "default/layout.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block title %} Kosár {% endblock %}
 
@@ -56,14 +57,17 @@
                 <hr>
                 <h3>Rendelés</h3>
                 <hr>
+                {% for item in items %}
                 <div class="cart-row">
-					<div style="flex:2"><img class="row-image" src="{% static 'images/placeholder.png' %}"></div>
-					<div style="flex:2"><p>Termék 1</p></div>
-					<div style="flex:1"><p>1500 HUF</p></div>
-					<div style="flex:1"><p>x2</p></div>
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>{{item.product.price|floatformat:0|intcomma}} HUF</p></div>
+					<div style="flex:1"><p>x{{item.quantity}}</p></div>
 				</div>
-				<h5>Darabszám:   2</h5>
-				<h5>Összeg:   3000</h5>
+                {% endfor %}
+
+				<h5>Darabszám:   {{order.get_cart_items}}</h5>
+				<h5>Összeg:   {{order.get_cart_total|floatformat:0|intcomma}} HUF</h5>
             </div>
         </div>
     </div>

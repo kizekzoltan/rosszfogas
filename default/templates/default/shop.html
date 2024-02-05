@@ -16,7 +16,7 @@
             <h6><strong>{{product.name}}</strong></h6>
             <hr>
             <button class="btn btn-outline-secondary add-btn">Kosárba</button>
-            <a class="btn btn-outline-success" href="#">Részletek</a>
+            <a class="btn btn-outline-success" href="{% url 'item_detail' item_name=product.name %}">Részletek</a>
             <h4 style="display: inline-block;float: right;">{{product.price|floatformat:0|intcomma}} HUF</h4>
         </div>
     </div>
