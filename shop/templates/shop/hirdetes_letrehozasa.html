@@ -1,14 +1,93 @@
 {% extends "default/layout.html" %}
 {% load static %}
 
+{% block sytlesheets %}
+<style>
+    .doboz {
+        width: 800px;
+        background-color: #F0F0F0;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .gombcsoport {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .input-field {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .pipatarto {
+        display: inline-block;
+        vertical-align: auto;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .checkbox-label {
+        margin-left: 5px;
+    }
+    .register-button {
+        width: 100%;
+        background-color: #fff;
+        color: #F77C01;
+        border: 2px solid #F77C01;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .register-button:hover {
+        background-color: #F77C01;
+        color: #fff
+    }
+</style>
+{% endblock %}
+
+
+
 {% block title %} Hirdetés létrehozása {% endblock %}
 
 {% block body %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="doboz">
+        <div class="gombcsoport">
+            <label for="name">Hirdetés címe:</label>
+            {{ form.name }}
+            <label for="price">Ár:</a></label>
+            {{ form.price }}
+        </div>
+        <div class="gombcsoport">
+            <label for="price">Kategória:</a></label>
+            {{ form.kategoria }}
+            <label for="price">Állapot:</a></label>
+            {{ form.allapot }}
+        </div>
+        <label for="price">Postázási cím:</a></label>
+        {{ form.feladocim }}
+        <label for="price">Leírás:</a></label>
+        {{ form.leiras }}
+        <label for="price">Kép:</a></label>
+        {{ form.kep }}
+        <div class="pipatarto">
+            {{ form.terms_checkbox }}
+            <label for="termsCheckbox">Elfogadom a <a href="#">szerződési feltételeket</a></label>
+        </div>
+        <button type="submit" class="register-button"><strong>Hirdetés feladása</strong></button>
+    </div>
+</form>
+
     
-    <!-- create_advert.html -->
+<!-- create_advert.html 
 <div class="center-container">
     <form method="post" action="{% url 'hirdetes_letrehozasa' %}" enctype="multipart/form-data">
-        <!-- Basic Information Section -->
+        
         <div class="form-section">
             <label for="name">Név:</label>
             <input type="text" id="name" name="name" required>
@@ -23,61 +102,55 @@
             <input type="text" id="brand" name="brand" required>
         </div>
 
-        <!-- Details Section -->
+        
         <div class="form-section">
             <label for="category">Kategória:</label>
             <select id="category" name="category" required>
-                <option value="category1">Háztartáso gép</option>
+                <option value="category1">Háztartási gép</option>
                 <option value="category2">Elektronikai eszköz</option>
                 <option value="category2">Állat</option>
                 <option value="category2">Étel</option>
                 <option value="category2">Ház</option>
-                <!-- Add more options as needed -->
+                
             </select>
 
-            <label for="quality">Quality:</label>
+            <label for="quality">Állapot:</label>
             <select id="quality" name="quality" required>
                 <option value="excellent">Új</option>
                 <option value="good">Bontatlan</option>
                 <option value="excellent">Használt</option>
                 <option value="excellent">Nem működő</option>
-                <!-- Add more options as needed -->
+                
             </select>
 
             <label for="description">Leírás:</label>
             <textarea id="description" name="description" required></textarea>
         </div>
 
-        <!-- Image Section -->
+        
         <div class="form-section">
             <label for="images">Kép hozzáadás:</label>
             <input type="file" id="termek_kep" name="images" accept="image/*" multiple>
 
-            <!-- Display uploaded images here if needed -->
+        
             <div id="image-preview"></div>
         </div>
 
-        <!-- Agreements Section -->
+        
         <div class="form-section">
             <input type="checkbox" id="agreement" name="agreement" required>
             <label for="agreement">Elolvastam és hozzájárulok a felhasználói feltételekhez</label>
         </div>
 
-        <!-- Publish Button -->
+        
         <div class="form-section">
             <button type="submit">Feladás</button>
         </div>
     </form>
 </div>
+-->
 
 {% endblock %}
 
 {% block scripts %}
-imgInp.onchange = evt = {
-    const [file] = imgInp.files
-    if (file) {
-      termek_kep.src = URL.createObjectURL(file)
-    }
-  }   
-{# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
 {% endblock %}

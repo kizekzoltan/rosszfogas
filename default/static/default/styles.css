@@ -208,7 +208,6 @@ h6 {
 
 .center-container {
   max-width: 600px;
-  /* Adjust the maximum width as needed */
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
@@ -277,6 +276,7 @@ textarea {
     background-color: #c5def8;
     transition: 1s;
  
+}
 .footer {
     color: #6C8FB1;
     background-color: #213144;
