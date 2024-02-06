@@ -38,14 +38,14 @@ h6 {
     height: 50px;
     width: auto;
     display: inline-block;
-    margin-left: 35vh;
+    margin-left: 15vh;
 }
 
 #cart-icon {
     width: 45px;
     display: inline-block;
     margin-left: 15px;
-    margin-right: 30vh;
+    margin-right: 15vh;
 }
 
 #cart-total{
@@ -223,11 +223,6 @@ form {
     flex-wrap: wrap;
 }
 
-form {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .form-section {
     margin-bottom: 20px;
     flex: 0 0 100%;
@@ -246,4 +241,26 @@ textarea {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.footer {
+    color: #6C8FB1;
+    background-color: #213144;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer img {
+    max-width: 200px;
+    margin-bottom: 10px;
+}
+
+.logofooter{
+    display: inline-block;
+    margin-left: 5vh;
 }
