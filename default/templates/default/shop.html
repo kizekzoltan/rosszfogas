@@ -8,16 +8,16 @@
     
 <div class="row">
     {% for product in products %}
-    <div class="product-card col-lg-4">
+    <div class="product-card col-lg-4 col-md-6">
         <div class="product-image">
-        <img class="thumbnail" src="{{product.imageURL}}">
+        <a href="{% url 'item_detail' item_name=product.name %}"><img class="thumbnail" src="{{product.imageURL}}"></a>
         </div>
         <div class="box-element product">
             <h6><strong>{{product.name}}</strong></h6>
             <hr>
-            <button class="btn btn-outline-secondary add-btn">Kosárba</button>
-            <a class="btn btn-outline-success" href="{% url 'item_detail' item_name=product.name %}">Részletek</a>
-            <h4 style="display: inline-block;float: right;">{{product.price|floatformat:0|intcomma}} HUF</h4>
+            <!-- <a class="btn btn-outline-success" >Részletek</a> -->
+            <h4 style="display: inline-block;">{{product.price|floatformat:0|intcomma}} HUF</h4>
+            <button class="btn btn-outline-secondary add-btn" style="display: inline-block;float: right;">Kosárba</button>
         </div>
     </div>
     {% endfor %}
