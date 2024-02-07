@@ -1,5 +1,17 @@
 body {
   background-color: hsl(0, 0%, 98%);
+  margin: 0;
+  padding-bottom: 100px; /* Adjust this value according to the height of your footer */
+}
+
+footer {
+  bottom: 0;
+  height: 100px
+}
+
+html {
+  position: relative;
+  min-height: 100%;
 }
 
 h1,
