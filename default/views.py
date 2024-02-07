@@ -4,6 +4,7 @@
 """
 from django.shortcuts import render, get_object_or_404
 from .models import *
+from django.http import JsonResponse
 
 # - Views
 def shop(request):
@@ -39,3 +40,6 @@ def checkout(request):
 def item_detail(request, item_name):
     product = get_object_or_404(Product, name=item_name)
     return render(request, 'default/item_detail.html', {'product': product})
+
+def updateItem(request):
+    return JsonResponse('Item was added', safe=False)
