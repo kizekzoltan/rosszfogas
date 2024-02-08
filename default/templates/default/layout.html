@@ -9,6 +9,9 @@
         <title>Rosszfogás - {% block title %}{% endblock %}</title>
         
         <!--Stílusok-->
+        <!-- Regebbi BS, még kellhet
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" type="text/css" href="{% static 'default/styles.css' %}">
@@ -18,7 +21,7 @@
         {% endblock %}
     </head>
     <body>
-        
+    
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'shop' %}">
@@ -50,9 +53,9 @@
                 </ul>
     
                 <div class="form-inline my-2 my-lg-0">
-                    <a href="#" class="btn btn-primary btn-rounded custom-btn" href="{% url 'bejelentkezes' %}">Regisztráció</a>
+                    <a class="btn btn-primary btn-rounded custom-btn" href="{% url 'regisztracio' %}">Regisztráció</a>
                     <span class="vertical-line"></span>
-                    <a href="#" class="btn btn-primary btn-rounded custom-btn" href="{% url 'regisztracio' %}">Bejelentkezés</a>
+                    <a class="btn btn-primary btn-rounded custom-btn" href="{% url 'bejelentkezes' %}">Bejelentkezés</a>
                     
                     <a href="{% url 'kosar' %}">
                         <img id="cart-icon" src="{% static 'images/kosar.png' %}">
@@ -61,6 +64,8 @@
               </div>
             </div>
         </nav>
+      
+
 
         <div class="container">
             {% block body %}
@@ -69,11 +74,21 @@
         </div>
         
         <!--Lábléc-->
-        <div class="footer">
-            {# TODO lábléc #}
+
+        <div class="">
+            <footer class="footer">
+                <img class="logofooter" src="{% static 'images/logofooter.png' %}" alt="Company Logo">
+                <p style="text-align: justify; text-align-last: left; margin-right: 5vh;">&copy; A weboldal teljes mértékben fiktív, tényleges árusításra nem jogosult. Egy iskolai projekt része, mely végeztével a weboldal részben/egészben elveszti funkcióit. Szerzői jogi védelem alatt álló oldal. <br> A honlapon elhelyezett szöveges és képi anyagok, arculati és tartalmi elemek felhasználása, másolása, terjesztése, továbbítása - akár részben, vagy egészben - kizárólag a Jófogás előzetes, írásos beleegyezésével lehetséges.</p>
+            </footer>
         </div>
+        
 
         <!--Skriptek-->
+        <!-- Régebbi BS, lehet majd kelleni fog
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{% static 'default/main.js' %}"></script>
         {# Oldalanként külön skriptek hozzáadásához #}
