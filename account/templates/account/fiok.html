@@ -9,10 +9,10 @@
 <div class="profile-container">
     <!-- Upper Block: User Information -->
     <div class="user-info">
-        <h2>User Information</h2>
-        <p><strong>Name:</strong> {{ user_profile.user.get_full_name }}</p>
+        <h2>Felhasználói adatok</h2>
+        <p><strong>Név:</strong> {{ user_profile.user.get_full_name }}</p>
         <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
-        <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+        <p><strong>Telefonszám:</strong> {{ user_profile.phone_number }}</p>
     </div>
 
     <!-- Line Separator -->
@@ -20,7 +20,7 @@
 
     <!-- Lower Block: User Adverts -->
     <div class="user-adverts">
-        <h2>User Adverts</h2>
+        <h2>Hirdetéseim</h2>
         {% for item in items_for_sale %}
             <div class="card">
                 <img src="{{ item.image_url }}" alt="{{ item.name }}" class="card-image">
