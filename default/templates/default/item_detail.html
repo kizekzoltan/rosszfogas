@@ -1,0 +1,15 @@
+{% extends "default/layout.html" %}
+{% load static %}
+
+{% block title %} {{product.name}} {% endblock %}
+
+{% block body %}
+    
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+
+{% endblock %}
+
+{% block scripts %}
+    {# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+{% endblock %}

@@ -1,11 +1,76 @@
 {% extends "default/layout.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block title %} Kosár {% endblock %}
 
 {% block body %}
 
-    <h3>ch</h3>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="box-element" id="form-wrapper">
+                <form id="form">
+                    <div id="user-info">
+                        <hr>
+						<p>Személyes adatok:</p>
+						<hr>
+                        <div class="form-field">
+							<input required class="form-control" type="text" name="name" placeholder="Név">
+						</div>
+						<div class="form-field">
+							<input required class="form-control" type="email" name="email" placeholder="Email">
+						</div>
+                    </div>
+                    <div id="shipping-info">
+                        <hr>
+						<p>Szállítási adatok:</p>
+						<hr>
+						<div class="form-field">
+							<input class="form-control" type="text" name="address" placeholder="Cím">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="city" placeholder="Város">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="state" placeholder="Ország">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="zipcode" placeholder="Irányítószám">
+						</div>
+                    </div>
+                    <hr>
+                    <div class="d-grid gap-2">
+                    <input id="form-button" class="btn btn-success" type="submit" value="Folytatás">
+                    </div>
+                </form>
+            </div>
+            <br>
+
+            <div class="box-element hidden" id="payment-info">
+                <small>Paypal fizetés</small>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'kosar' %}">&#x2190;Vissza a kosárhoz</a>
+                <hr>
+                <h3>Rendelés</h3>
+                <hr>
+                {% for item in items %}
+                <div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>{{item.product.price|floatformat:0|intcomma}} HUF</p></div>
+					<div style="flex:1"><p>x{{item.quantity}}</p></div>
+				</div>
+                {% endfor %}
+
+				<h5>Darabszám:   {{order.get_cart_items}}</h5>
+				<h5>Összeg:   {{order.get_cart_total|floatformat:0|intcomma}} HUF</h5>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
