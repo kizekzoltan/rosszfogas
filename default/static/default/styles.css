@@ -1,5 +1,17 @@
 body {
-    background-color: hsl(0, 0%, 98%);
+  background-color: hsl(0, 0%, 98%);
+  margin: 0;
+  padding-bottom: 100px; /* Adjust this value according to the height of your footer */
+}
+
+footer {
+  bottom: 0;
+  height: 100px
+}
+
+html {
+  position: relative;
+  min-height: 100%;
 }
 
 h1,
@@ -226,11 +238,10 @@ h6 {
 }
 
 .center-container {
-    max-width: 600px;
-    /* Adjust the maximum width as needed */
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 form {

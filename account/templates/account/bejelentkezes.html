@@ -1,37 +1,74 @@
-{% extends "default/layout.html" %} {% load static %} {% block title %}
-Bejelentkezés {% endblock %} {% block body %}
-<section class="signup">
-  <div class="container, col-12">
-      <div class="signup-content, row justify-content-center align-items-center">
-          <div class="card-sign">
-              <h2 class="form-title">Sign in</h2>
-              <form method="POST" class="register-form" id="register-form">
-                  <div class="form-group">
-                      <label for="email"><i class="zmdi zmdi-email"></i></label>
-                      <input type="email" name="email" id="email" placeholder="Your Email"/>
-                  </div>
-                  <div class="form-group">
-                      <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                      <input type="password" name="pass" id="pass" placeholder="Password"/>
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="checkbox"
-                      name="remember-me"
-                      id="remember-me"
-                      class="agree-term"
-                    />
-                    <label for="remember-me" class="label-agree-term"
-                      ><span><span></span></span>Remember me</label
-                    >
-                  </div>
-                  <div class="form-group form-button">
-                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
-                </div>
-              </form>
-          </div>
+{% extends "default/layout.html" %} {% load static %} 
+
+{% block sytlesheets %}
+<style>
+    .doboz {
+        width: 300px;
+        background-color: #F0F0F0;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 29%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .gombcsoport {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .input-field {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .pipatarto {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .checkbox-label {
+        margin-left: 5px;
+    }
+    .register-button {
+        width: 100%;
+        background-color: #fff;
+        color: #F77C01;
+        border: 2px solid #F77C01;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .register-button:hover {
+        background-color: #F77C01;
+        color: #fff
+    }
+</style>
+{% endblock %}
+
+
+{% block title %}
+Bejelentkezés 
+{% endblock %} 
+
+{% block body %}
+
+<form method="post">
+  {% csrf_token %}
+  <div class="doboz">
+      <div class="gombcsoport">
+          <a class="btn btn-primary btn-rounded custom-btn" href="{% url 'regisztracio' %}"><strong>Regisztráció</strong></a>
+          <a class="btn btn-primary btn-rounded custom-btn" style="background-color: #007bff; color: #fff;" href="">Bejelentkezés</a>
       </div>
+      {{ form.username }}
+      {{ form.password }}
+      <button type="submit" class="register-button"><strong>Bejelentkezés</strong></button>
   </div>
-</section>
-{% endblock %} {% block scripts %} 
-{# Ide jönnek a szkriptek, ha esetlegkelleneegyedi csak ehhez az oldalhoz #} {% endblock %}
+</form>
+
+{% endblock %} 
+
+
+{% block scripts %} 
+{# Ide jönnek a szkriptek, ha esetlegkelleneegyedi csak ehhez az oldalhoz #} 
+{% endblock %}

@@ -3,6 +3,7 @@
     @package rosszfogas
 """
 from django.shortcuts import render
+from .forms import HirdetesForm
 
 # - Views
 def shop_view(request):
@@ -14,7 +15,8 @@ def product_view(request, product_name: str):
 
 
 def create_product_view(request):
-    return render(request, "shop/hirdetes_letrehozasa.html")
+    form = HirdetesForm()
+    return render(request, 'shop/hirdetes_letrehozasa.html', {'form': form})
 
 
 def payment_view(request):
