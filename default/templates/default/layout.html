@@ -1,4 +1,6 @@
 {% load static %}
+{% url 'regisztracio' as regisztracio_url %}
+{% url 'bejelentkezes' as bejelentkezes_url %}
 
 <!DOCTYPE html>
 <html lang="hu">
@@ -21,7 +23,28 @@
             var user = '{{request.user}}'
         </script>
 
+        <script>
+            function toggleDropdown() {
+            document.getElementById("dropdown-menu").classList.toggle("show");
+          }
+          window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+              var dropdowns = document.getElementsByClassName("dropdown-content");
+              var i;
+              for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                  openDropdown.classList.remove('show');
+                }
+              }
+            }
+          }
+        </script>
+
         {# Oldalanként külön stílusok hozzáadásához #}
+        <style>
+            
+        </style>
         {% block sytlesheets %}
         {% endblock %}
     </head>
@@ -44,27 +67,43 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'fiok' %}">
-                            <i class='bx bxs-conversation'></i>
-                            <strong>Fórum</strong>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'hirdetes_letrehozasa' %}">
+                        <a class="nav-link active" href="{% url 'gyik' %}">
                             <i class='bx bx-question-mark'></i>
                             <strong>GY.I.K.</strong>
                         </a>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'forum' %}">
+                                <i class='bx bxs-conversation'></i>
+                                <strong>Fórum</strong>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
     
                 <div class="form-inline my-2 my-lg-0">
+                    {% if user.is_authenticated %}
+                    <div class="dropdown" style="display: inline-block;">
+                        <button onclick="toggleDropdown()" class="dropbtn">
+                          <i id="user-icon" class='bx bxs-user-circle bx-md'></i>
+                        </button>
+                        <div id="dropdown-menu" class="dropdown-content">
+                          <a href="{% url 'fiok' %}">Profilom</a>
+                          <a href="{% url 'hirdetes_letrehozasa' %}">Hirdetés</a>
+                          <a href="{% url 'logout' %}">Kijelentkezés</a>
+                        </div>
+                      </div>
+                      <a href="{% url 'kosar' %}"  style="text-decoration: none;">
+                        <i id="cart-icon" class='bx bxs-cart bx-md'></i>
+                      </a>
+                    {% endif %}
+
+                    {% if request.path != regisztracio_url and request.path != bejelentkezes_url and not user.is_authenticated %}
                     <a class="btn btn-primary btn-rounded custom-btn" href="{% url 'regisztracio' %}">Regisztráció</a>
                     <span class="vertical-line"></span>
-                    <a class="btn btn-primary btn-rounded custom-btn" href="{% url 'bejelentkezes' %}">Bejelentkezés</a>
-                    
-                    <a href="{% url 'kosar' %}">
-                        <img id="cart-icon" src="{% static 'images/kosar.png' %}">
-                    </a>
+                    <a class="btn btn-primary btn-rounded custom-btn" href="{% url 'bejelentkezes' %}" style="margin-right: 15vh;">Bejelentkezés</a>
+                    {% endif %}
                 </div>
               </div>
             </div>
@@ -83,7 +122,7 @@
         <div class="">
             <footer class="footer">
                 <img style="margin-right: 1vh;" class="logofooter" src="{% static 'images/logofooter.png' %}" alt="Company Logo">
-                <p style="text-align: justify; text-align-last: left; margin-right: 5vh;">&copy; A weboldal teljes mértékben fiktív, tényleges árusításra nem jogosult. Egy iskolai projekt része, mely végeztével a weboldal részben/egészben elveszti funkcióit. Szerzői jogi védelem alatt álló oldal. <br> A honlapon elhelyezett szöveges és képi anyagok, arculati és tartalmi elemek felhasználása, másolása, terjesztése, továbbítása - akár részben, vagy egészben - kizárólag a Rosszfogás előzetes, írásos beleegyezésével lehetséges.</p>
+                <p style="text-align: justify; text-align-last: left; margin-right: 5vh;">&copy; A weboldal teljes mértékben fiktív, tényleges árusításra nem jogosult. Egy iskolai projekt része, mely végeztével a weboldal részben/egészben elveszti funkcióit. Szerzői jogi védelem alatt álló oldal.</p>
             </footer>
         </div>
         

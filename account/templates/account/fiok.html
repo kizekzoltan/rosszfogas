@@ -4,21 +4,21 @@
 {% block title %} Fiók {% endblock %}
 
 {% block body %}
-  <!-- profile.html -->
 
 <div class="profile-container">
-    <!-- Upper Block: User Information -->
     <div class="user-info">
         <h2>User Information</h2>
-        <p><strong>Name:</strong> {{ user_profile.user.get_full_name }}</p>
-        <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
-        <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+        <p><strong>Name:</strong> {{ customer.name }}</p>
+        <p><strong>Email:</strong> {{ customer.email }}</p>
+        <p><strong>Vezeteknev:</strong></p>
     </div>
 
-    <!-- Line Separator -->
     <div class="separator"></div>
 
-    <!-- Lower Block: User Adverts -->
+    <!-- EZ MÉG KELL KI NE TOROLD GECI
+        
+        
+        Lower Block: User Adverts
     <div class="user-adverts">
         <h2>User Adverts</h2>
         {% for item in items_for_sale %}
@@ -29,6 +29,7 @@
             </div>
         {% endfor %}
     </div>
+     -->
 </div>
 
 

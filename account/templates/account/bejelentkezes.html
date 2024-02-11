@@ -53,7 +53,7 @@ Bejelentkezés
 
 {% block body %}
 
-<form method="post">
+<form method="post" action="{% url 'bejelentkezes' %}">
   {% csrf_token %}
   <div class="doboz">
       <div class="gombcsoport">
