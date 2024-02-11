@@ -1,83 +1,177 @@
 {% extends "default/layout.html" %}
 {% load static %}
+{% load humanize %}
+
+{% block sytlesheets %}
+<style>
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+    }
+    .container {
+        position: relative;
+    }
+    .register-button {
+        width: 100%;
+        background-color: #fff;
+        color: #F77C01;
+        border: 2px solid #F77C01;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .register-button:hover {
+        background-color: #F77C01;
+        color: #fff
+    }
+
+    .green-border {
+    border: 5px solid rgb(0, 255, 0);
+    border-radius: 5px;
+    animation: border-animation 3s forwards; /* Apply animation */
+    }
+
+    .grey-border {
+        border: 5px solid #ccc;
+        border-radius: 5px;
+    }
+
+    @keyframes border-animation {
+        0% { border-color: rgb(0, 255, 0); }
+        100% { border-color: #ccc; }
+    }
+</style>
+{% endblock %}
 
 {% block title %} Hirdetés létrehozása {% endblock %}
 
 {% block body %}
-    
-    <!-- create_advert.html -->
-<div class="center-container">
-    <form method="post" action="{% url 'hirdetes_letrehozasa' %}" enctype="multipart/form-data">
-        <!-- Basic Information Section -->
-        <div class="form-section">
-            <label for="name">Név:</label>
-            <input type="text" id="name" name="name" required>
 
-            <label for="price">Ár:</label>
-            <input type="number" id="price" name="price" required>
 
-            <label for="address">Feladó címe:</label>
-            <input type="text" id="address" name="address" required>
-
-            <label for="brand">Márka:</label>
-            <input type="text" id="brand" name="brand" required>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element" id="form-wrapper">
+            <form id="form">
+                <div id="user-info">
+                    <hr>
+                    <h3><strong>Termék adatok:</strong></h3>
+                    <hr>
+                    <div class="form-field">
+                        <label>Hirdetés címe:</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="form-field">
+                        <label>Leírás:</label>
+                        {{ form.leiras }}
+                    </div>
+                    <div class="form-field">
+                        <label>Ára (HUF):</label>
+                        {{ form.price }}
+                    </div>
+                    <div class="form-field">
+                        <label>Kategória:</label>
+                        {{ form.kategoria }}
+                    </div>
+                    <div class="form-field">
+                        <label>Állapot:</label>
+                        {{ form.allapot }}
+                    </div>
+                    <hr>
+                    <h3><strong>Szállítási adatok:</strong></h3>
+                    <hr>
+                    <div class="form-field">
+                        <label>Feladó címe:</label>
+                        {{ form.feladocim }}
+                    </div>
+                    <div class="form-field">
+                        <label>Országa</label>
+                        {{ form.feladoorszag }}
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                </div>
+            </form>
         </div>
+        <br>
+    </div>
 
-        <!-- Details Section -->
-        <div class="form-section">
-            <label for="category">Kategória:</label>
-            <select id="category" name="category" required>
-                <option value="category1">Háztartáso gép</option>
-                <option value="category2">Elektronikai eszköz</option>
-                <option value="category2">Állat</option>
-                <option value="category2">Étel</option>
-                <option value="category2">Ház</option>
-                <!-- Add more options as needed -->
-            </select>
-
-            <label for="quality">Quality:</label>
-            <select id="quality" name="quality" required>
-                <option value="excellent">Új</option>
-                <option value="good">Bontatlan</option>
-                <option value="excellent">Használt</option>
-                <option value="excellent">Nem működő</option>
-                <!-- Add more options as needed -->
-            </select>
-
-            <label for="description">Leírás:</label>
-            <textarea id="description" name="description" required></textarea>
+    <div class="col-lg-6">
+        <div class="box-element">
+            <hr>
+            <h3><strong>Kép hozzáadása:</strong></h3>
+            <hr>
+            <br>
+            <br>
+            <div id="user-info" class="container">
+                <div class="form-field">
+                    <label></label>
+                    <input type="file" id="imageInput" accept="image/*" onchange="displaySelectedImage(event)" style="display: none;">
+                    <input type="button" value="Kiválasztás" onclick="document.getElementById('imageInput').click();">
+                    <!-- Image preview -->
+                    <div id="selectedImageContainer" class="centered"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <hr>
+            
+            <div class="payment-info">
+                <div class="form-field" style="margin-left: 200px;">
+                    {{ form.terms_checkbox }}
+                    <label>Elfogadom a szerződési feltételeket</label>
+                </div>
+            </div>
+            <button type="submit" class="register-button"><strong>Hirdetés feladása</strong></button>
         </div>
-
-        <!-- Image Section -->
-        <div class="form-section">
-            <label for="images">Kép hozzáadás:</label>
-            <input type="file" id="termek_kep" name="images" accept="image/*" multiple>
-
-            <!-- Display uploaded images here if needed -->
-            <div id="image-preview"></div>
-        </div>
-
-        <!-- Agreements Section -->
-        <div class="form-section">
-            <input type="checkbox" id="agreement" name="agreement" required>
-            <label for="agreement">Elolvastam és hozzájárulok a felhasználói feltételekhez</label>
-        </div>
-
-        <!-- Publish Button -->
-        <div class="form-section">
-            <button type="submit">Feladás</button>
-        </div>
-    </form>
+    </div>
 </div>
 
 {% endblock %}
 
 {% block scripts %}
-imgInp.onchange = evt = {
-    const [file] = imgInp.files
-    if (file) {
-      termek_kep.src = URL.createObjectURL(file)
+<script>
+    function displaySelectedImage(event) {
+        const input = event.target;
+        const selectedImageContainer = document.getElementById('selectedImageContainer');
+        
+        // Remove any previously displayed image
+        selectedImageContainer.innerHTML = '';
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const image = document.createElement('img');
+                image.src = e.target.result;
+                image.alt = 'Selected Image';
+                image.style.width = '150px';
+                image.style.height = '150px';
+                selectedImageContainer.appendChild(image);
+                image.classList.add('green-border');
+                setTimeout(function() {
+                    image.classList.remove('green-border');
+                    image.classList.add('grey-border');
+                }, 3000);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
     }
-  }   
-{# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+
+    // Function to set default placeholder image
+    function setDefaultImage() {
+        const selectedImageContainer = document.getElementById('selectedImageContainer');
+        const defaultImage = document.createElement('img');
+        defaultImage.src = "{% static 'images/placeholder150.png' %}";
+        defaultImage.alt = 'Placeholder Image';
+        defaultImage.style.width = '200px';
+        defaultImage.style.height = '150px';
+        selectedImageContainer.appendChild(defaultImage);
+    }
+    
+    // Call setDefaultImage() initially to display the default placeholder image
+    window.onload = setDefaultImage;
+</script>
 {% endblock %}
