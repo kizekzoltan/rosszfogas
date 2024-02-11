@@ -17,7 +17,7 @@
             <hr>
             <!-- <a class="btn btn-outline-success" >Részletek</a> -->
             <h4 style="display: inline-block;">{{product.price|floatformat:0|intcomma}} HUF</h4>
-            <button class="btn btn-outline-secondary add-btn" style="display: inline-block;float: right;">Kosárba</button>
+            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart" style="display: inline-block;float: right;">Kosárba</button>
         </div>
     </div>
     {% endfor %}
