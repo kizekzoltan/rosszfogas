@@ -5,6 +5,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.http import JsonResponse
+from django.contrib.auth import logout
 
 # - Views
 def shop(request):
@@ -43,3 +44,9 @@ def item_detail(request, item_name):
 
 def updateItem(request):
     return JsonResponse('Item was added', safe=False)
+
+def forum(request):
+    return render(request, 'default/forum.html')
+
+def gyik(request):
+    return render(request, 'default/gyik.html')
