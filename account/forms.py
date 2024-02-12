@@ -5,7 +5,7 @@ class RegistrationForm(forms.Form):
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Felhasználónév'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Jelszó'}))
     password_confirm = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Jelszó újra'}))
-    terms_checkbox = forms.BooleanField(required=True)
+    terms_checkbox = forms.BooleanField()
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
