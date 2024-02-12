@@ -1,7 +1,7 @@
 body {
   background-color: hsl(0, 0%, 98%);
   margin: 0;
-  padding-bottom: 100px; /* Adjust this value according to the height of your footer */
+  padding-bottom: 150px;
 }
 
 footer {
@@ -98,6 +98,23 @@ h6 {
     display: inline-block;
     padding: 5px;
 }
+.form-field img {
+    width: 250px;
+    display: inline-block;
+    border: 5px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5vh;
+}
+.form-field-cb {
+    width: 300px;
+    display: inline-block;
+    padding: 5px;
+}
+.form-field-desc {
+    width: 700px;
+    display: inline-block;
+    padding: 5px;
+}
 
 .cart-row {
     display: flex;
@@ -173,7 +190,7 @@ h6 {
 .profile-container {
     width: 80%;
     margin: 50px auto;
-    border: 1px solid #ccc;
+    border: 3px solid black;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -194,9 +211,8 @@ h6 {
 
 .profile-title {
     grid-column: 1 / span 3;
-    /* Span all columns */
     margin: 0;
-    padding-bottom: 10px;
+    padding-bottom: 25px;
 }
 
 .profile-info-item {
@@ -205,10 +221,13 @@ h6 {
 
 .profile-card {
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 2px solid black;
     border-radius: 5px;
     padding: 20px;
     margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: 20px;

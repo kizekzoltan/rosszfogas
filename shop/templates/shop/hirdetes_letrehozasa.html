@@ -53,9 +53,12 @@
 <div class="row">
     <form id="form" method="post" action="{% url 'hirdetes_letrehozasa' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="col-lg-6">
+        <div class="col-lg-8 mx-auto">
             <div class="box-element" id="form-wrapper">
                 <div id="user-info">
+                    <br>
+                    <h2 style="text-align: center;"><strong>Hirdetés feladása:</strong></h2>
+                    <br>
                     <hr>
                     <h3><strong>Termék adatok:</strong></h3>
                     <hr>
@@ -63,7 +66,7 @@
                         <label>Hirdetés címe:</label>
                         {{ form.name }}
                     </div>
-                    <div class="form-field">
+                    <div class="form-field-desc">
                         <label>Leírás:</label>
                         {{ form.description }}
                     </div>
@@ -93,12 +96,6 @@
                 </div>
                 <div class="d-grid gap-2">
                 </div>
-            </div>
-            <br>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="box-element">
                 <hr>
                 <h3><strong>Kép hozzáadása:</strong></h3>
                 <hr>
@@ -106,11 +103,9 @@
                 <br>
                 <div id="user-info" class="container">
                     <div class="form-field">
-                        <label></label>
-                        <input type="file" id="imageInput" accept="image/*" onchange="displaySelectedImage(event)" style="display: none;">
-                        <input type="button" value="Kiválasztás" onclick="document.getElementById('imageInput').click();">
-                        <!-- Image preview -->
-                        <div id="selectedImageContainer" class="centered"></div>
+                        <label for="{{ form.image.id_for_label }}"></label>
+                        {{ form.image }}
+                        <img id="image-preview" src="#" alt="Image Preview" style="display:none; max-width: 200px; max-height: 200px;">
                     </div>
                 </div>
                 <br>
@@ -118,7 +113,7 @@
                 <hr>
                 
                 <div class="payment-info">
-                    <div class="form-field" style="margin-left: 200px;">
+                    <div class="form-field-cb" style="margin-left: 230px;">
                         {{ form.terms_checkbox }}
                         <label>Elfogadom a szerződési feltételeket</label>
                     </div>
@@ -133,46 +128,18 @@
 
 {% block scripts %}
 <script>
-    function displaySelectedImage(event) {
-        const input = event.target;
-        const selectedImageContainer = document.getElementById('selectedImageContainer');
-        
-        // Remove any previously displayed image
-        selectedImageContainer.innerHTML = '';
-        
-        if (input.files && input.files[0]) {
+    document.getElementById("{{ form.image.id_for_label }}").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
             const reader = new FileReader();
-            
             reader.onload = function(e) {
-                const image = document.createElement('img');
-                image.src = e.target.result;
-                image.alt = 'Selected Image';
-                image.style.width = '150px';
-                image.style.height = '150px';
-                selectedImageContainer.appendChild(image);
-                image.classList.add('green-border');
-                setTimeout(function() {
-                    image.classList.remove('green-border');
-                    image.classList.add('grey-border');
-                }, 3000);
+                const imagePreview = document.getElementById("image-preview");
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = "block";
+                imagePreview.style.marginRight = "3vh";
             }
-            
-            reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(file);
         }
-    }
-
-    // Function to set default placeholder image
-    function setDefaultImage() {
-        const selectedImageContainer = document.getElementById('selectedImageContainer');
-        const defaultImage = document.createElement('img');
-        defaultImage.src = "{% static 'images/placeholder150.png' %}";
-        defaultImage.alt = 'Placeholder Image';
-        defaultImage.style.width = '200px';
-        defaultImage.style.height = '150px';
-        selectedImageContainer.appendChild(defaultImage);
-    }
-    
-    // Call setDefaultImage() initially to display the default placeholder image
-    window.onload = setDefaultImage;
+    });
 </script>
 {% endblock %}

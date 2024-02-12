@@ -5,88 +5,56 @@
 
 {% block body %}
 
-<div class="profile-container">
-    <div class="user-info">
-        <h2>User Information</h2>
-        <p><strong>Name:</strong> {{ customer.name }}</p>
-        <p><strong>Email:</strong> {{ customer.email }}</p>
-        <p><strong>Vezeteknev:</strong></p>
-    </div>
-
-    <div class="separator"></div>
-
-    <!-- EZ MÉG KELL KI NE TOROLD GECI
-        
-        
-        Lower Block: User Adverts
-    <div class="user-adverts">
-        <h2>Hirdetéseim</h2>
-        {% for item in items_for_sale %}
-            <div class="card">
-                <img src="{{ item.image_url }}" alt="{{ item.name }}" class="card-image">
-                <h3>{{ item.name }}</h3>
-                <p>{{ item.description }}</p>
-            </div>
-        {% endfor %}
-    </div>
-     -->
 
 
-    <!--
-        <div class="profile-container">
-    <h1 class="profile-name" >Üdvözlünk Név</h1>
-    
-    <div class="profile-info">
+    <div class="profile-container">
+        <h1 class="profile-name" >Üdvözlünk {{ customer.name }}!</h1>
+    <div class="profile-info" id="profile-info">
         <h2 class="profile-title">Fiók adatok:</h2> 
-        <div class="profile-info-item">
-            <p>Name: John Doe</p>
-            <p>Name: John Doe</p>
+        <div class="profile-info-item" id="name-info">
+            <p>Full name: {{ customer.firstname }} {{ customer.lastname }}</p>
+            <p>Email cím: {{ customer.email }}</p>
         </div>
-        <div class="profile-info-item">
-            <p>Email: john@example.com</p>
+        <div class="profile-info-item" id="phone-info">
+            <p>Telefonszám: {{ customer.phone }}</p>
         </div>
-        <div class="profile-info-item">
-            <p>Location: New York, USA</p>
+        <div class="profile-info-item" id="location-info">
+            <p>Lakcím: {{ customer.location }}</p>
+        </div>
+        <button onclick="toggleEdit()">Edit</button>
+        <div class="profile-line"></div>
+        <br>
+        <h2 class="profile-title">Hirdetéseid:</h2> 
+    </div>
+
+
+    <div id="profile-edit" style="display: none;">
+        <div class="profile-info">
+            <h2 class="profile-title">Fiók adatok:</h2> 
+            <form method="post" id="edit-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save</button>
+            </form>
+            <div class="profile-line"></div>
+            <br>
+            <h2 class="profile-title">Hirdetéseid:</h2> 
         </div>
     </div>
-    <div class="profile-line"></div>
+
+
+
+    {% for product in products %}
     <div class="profile-card profile-products">
         <div>
-            <img src="https://placekitten.com/150/150" alt="Product Image">
+            <img class="thumbnail" src="{{ product.imageURL }}">
         </div>
         <div>
-            <h2>Product Name</h2>
-            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            <h2>Termék neve: {{product.name}}</h2>
+            <p>Leírás: {{product.description}}</p>
         </div>
     </div>
-    <div class="profile-card profile-products">
-        <div>
-            <img src="https://placekitten.com/150/150" alt="Product Image">
-        </div>
-        <div>
-            <h2>Product Name</h2>
-            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-        </div>
-    </div>
-    <div class="profile-card profile-products">
-        <div>
-            <img src="https://placekitten.com/300/400" alt="Product Image">
-        </div>
-        <div>
-            <h2>Product Name</h2>
-            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-        </div>
-    </div>
-    <div class="profile-card profile-products">
-        <div>
-            <img src="https://placekitten.com/500/300" alt="Product Image">
-        </div>
-        <div>
-            <h2>Product Name</h2>
-            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-        </div>
-    </div>
--->     
+    {% endfor %}
 </div>
 
 
@@ -94,5 +62,18 @@
 {% endblock %}
 
 {% block scripts %}
-    {# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+<script>
+    function toggleEdit() {
+        var profileInfo = document.getElementById("profile-info");
+        var profileEdit = document.getElementById("profile-edit");
+        
+        if (profileInfo.style.display === "none") {
+            profileInfo.style.display = "block";
+            profileEdit.style.display = "none";
+        } else {
+            profileInfo.style.display = "none";
+            profileEdit.style.display = "block";
+        }
+    }
+</script>
 {% endblock %}

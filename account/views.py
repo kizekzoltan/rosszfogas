@@ -2,24 +2,33 @@
     Forgalomvezérlő a fiók oldalakhoz
     @package rosszfogas
 """
-from default.models import *
+from default.models import Customer, Product
 from django.db import IntegrityError
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, UserProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
-# - Views
 def profile_view(request):
     current_user = request.user
     customer = Customer.objects.get(user=current_user)
-    
-    return render(request, "account/fiok.html", {'customer': customer})
-    
+    products = Product.objects.filter(customer=customer)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('fiok')
+    else:
+        form = UserProfileForm(instance=customer)  # Pass the instance to the form for editing
+        print(form.errors)
+
+    return render(request, "account/fiok.html", {'customer': customer, 'products': products, 'form': form})
+
 
 def register(request):
     if request.method == 'POST':
