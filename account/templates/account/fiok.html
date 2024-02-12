@@ -6,33 +6,60 @@
 {% block body %}
 
 <div class="profile-container">
-    <div class="user-info">
-        <h2>User Information</h2>
-        <p><strong>Name:</strong> {{ customer.name }}</p>
-        <p><strong>Email:</strong> {{ customer.email }}</p>
-        <p><strong>Vezeteknev:</strong></p>
+    <h1 class="profile-name" >Üdvözlünk Név</h1>
+    
+    <div class="profile-info">
+        <h2 class="profile-title">Fiók adatok:</h2> 
+        <div class="profile-info-item">
+            <p>Name: John Doe</p>
+            <p>Name: John Doe</p>
+        </div>
+        <div class="profile-info-item">
+            <p>Email: john@example.com</p>
+        </div>
+        <div class="profile-info-item">
+            <p>Location: New York, USA</p>
+        </div>
     </div>
-
-    <div class="separator"></div>
-
-    <!-- EZ MÉG KELL KI NE TOROLD GECI
-        
-        
-        Lower Block: User Adverts
-    <div class="user-adverts">
-        <h2>Hirdetéseim</h2>
-        {% for item in items_for_sale %}
-            <div class="card">
-                <img src="{{ item.image_url }}" alt="{{ item.name }}" class="card-image">
-                <h3>{{ item.name }}</h3>
-                <p>{{ item.description }}</p>
-            </div>
-        {% endfor %}
+    <div class="profile-line"></div>
+    <div class="profile-card profile-products">
+        <div>
+            <img src="https://placekitten.com/150/150" alt="Product Image">
+        </div>
+        <div>
+            <h2>Product Name</h2>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
     </div>
-     -->
+    <div class="profile-card profile-products">
+        <div>
+            <img src="https://placekitten.com/150/150" alt="Product Image">
+        </div>
+        <div>
+            <h2>Product Name</h2>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
+    </div>
+    <div class="profile-card profile-products">
+        <div>
+            <img src="https://placekitten.com/300/400" alt="Product Image">
+        </div>
+        <div>
+            <h2>Product Name</h2>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
+    </div>
+    <div class="profile-card profile-products">
+        <div>
+            <img src="https://placekitten.com/500/300" alt="Product Image">
+        </div>
+        <div>
+            <h2>Product Name</h2>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
+    </div>
+     
 </div>
-
-
 {% endblock %}
 
 {% block scripts %}
