@@ -51,9 +51,10 @@
 
 
 <div class="row">
-    <div class="col-lg-6">
-        <div class="box-element" id="form-wrapper">
-            <form id="form">
+    <form id="form" method="post" action="{% url 'hirdetes_letrehozasa' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-lg-6">
+            <div class="box-element" id="form-wrapper">
                 <div id="user-info">
                     <hr>
                     <h3><strong>Termék adatok:</strong></h3>
@@ -64,7 +65,7 @@
                     </div>
                     <div class="form-field">
                         <label>Leírás:</label>
-                        {{ form.leiras }}
+                        {{ form.description }}
                     </div>
                     <div class="form-field">
                         <label>Ára (HUF):</label>
@@ -79,7 +80,7 @@
                         {{ form.allapot }}
                     </div>
                     <hr>
-                    <h3><strong>Szállítási adatok:</strong></h3>
+                    <h3><strong>Feladó adatai:</strong></h3>
                     <hr>
                     <div class="form-field">
                         <label>Feladó címe:</label>
@@ -92,40 +93,40 @@
                 </div>
                 <div class="d-grid gap-2">
                 </div>
-            </form>
+            </div>
+            <br>
         </div>
-        <br>
-    </div>
 
-    <div class="col-lg-6">
-        <div class="box-element">
-            <hr>
-            <h3><strong>Kép hozzáadása:</strong></h3>
-            <hr>
-            <br>
-            <br>
-            <div id="user-info" class="container">
-                <div class="form-field">
-                    <label></label>
-                    <input type="file" id="imageInput" accept="image/*" onchange="displaySelectedImage(event)" style="display: none;">
-                    <input type="button" value="Kiválasztás" onclick="document.getElementById('imageInput').click();">
-                    <!-- Image preview -->
-                    <div id="selectedImageContainer" class="centered"></div>
+        <div class="col-lg-6">
+            <div class="box-element">
+                <hr>
+                <h3><strong>Kép hozzáadása:</strong></h3>
+                <hr>
+                <br>
+                <br>
+                <div id="user-info" class="container">
+                    <div class="form-field">
+                        <label></label>
+                        <input type="file" id="imageInput" accept="image/*" onchange="displaySelectedImage(event)" style="display: none;">
+                        <input type="button" value="Kiválasztás" onclick="document.getElementById('imageInput').click();">
+                        <!-- Image preview -->
+                        <div id="selectedImageContainer" class="centered"></div>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>
-            <hr>
-            
-            <div class="payment-info">
-                <div class="form-field" style="margin-left: 200px;">
-                    {{ form.terms_checkbox }}
-                    <label>Elfogadom a szerződési feltételeket</label>
+                <br>
+                <br>
+                <hr>
+                
+                <div class="payment-info">
+                    <div class="form-field" style="margin-left: 200px;">
+                        {{ form.terms_checkbox }}
+                        <label>Elfogadom a szerződési feltételeket</label>
+                    </div>
                 </div>
+                <button type="submit" class="register-button"><strong>Hirdetés feladása</strong></button>
             </div>
-            <button type="submit" class="register-button"><strong>Hirdetés feladása</strong></button>
         </div>
-    </div>
+    </form>
 </div>
 
 {% endblock %}

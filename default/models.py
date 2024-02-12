@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -11,23 +13,41 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+
 class Product(models.Model):
-    name = models.CharField(max_length=200, null=True)
+    ALLAPOT_CHOICES = [
+        ('--válasszon--', '--Válasszon--'),
+        ('bontatlan', 'Bontatlan'),
+        ('újszerű', 'Újszerű'),
+        ('használt', 'Használt'),
+        ('megviselt', 'Megviselt'),
+    ]
+    KATEGORIA_CHOICES = [
+        ('--válasszon--', '--Válasszon--'),
+        ('autó', 'Autó'),
+        ('élelmiszer', 'Élelmiszer'),
+        ('egyéb', 'Egyéb'),
+    ]
+
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
     price = models.FloatField()
     description = models.TextField()
-    available = models.BooleanField(default=True, null=True, blank=True)
+    feladocim = models.CharField(max_length=100, null=True, blank=True)
+    feladoorszag = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='default/images/')
-
+    allapot = models.CharField(max_length=50, choices=ALLAPOT_CHOICES, default='--válasszon--')
+    kategoria = models.CharField(max_length=50, choices=KATEGORIA_CHOICES, default='--válasszon--')
+    terms_checkbox = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.name
 
     @property
     def imageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = ''
-        return url
+        if self.image:
+            return '/images/' + str(self.image)
+        return ''
 
 
 
