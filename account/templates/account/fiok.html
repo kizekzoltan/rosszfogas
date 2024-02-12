@@ -4,36 +4,76 @@
 {% block title %} Fiók {% endblock %}
 
 {% block body %}
-  <!-- profile.html -->
 
-<div class="profile-container">
-    <!-- Upper Block: User Information -->
-    <div class="user-info">
-        <h2>Felhasználói adatok</h2>
-        <p><strong>Név:</strong> {{ user_profile.user.get_full_name }}</p>
-        <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
-        <p><strong>Telefonszám:</strong> {{ user_profile.phone_number }}</p>
+
+
+    <div class="profile-container">
+        <h1 class="profile-name" >Üdvözlünk {{ customer.name }}!</h1>
+    <div class="profile-info" id="profile-info">
+        <h2 class="profile-title">Fiók adatok:</h2> 
+        <div class="profile-info-item" id="name-info">
+            <p>Full name: {{ customer.firstname }} {{ customer.lastname }}</p>
+            <p>Email cím: {{ customer.email }}</p>
+        </div>
+        <div class="profile-info-item" id="phone-info">
+            <p>Telefonszám: {{ customer.phone }}</p>
+        </div>
+        <div class="profile-info-item" id="location-info">
+            <p>Lakcím: {{ customer.location }}</p>
+        </div>
+        <button onclick="toggleEdit()">Edit</button>
+        <div class="profile-line"></div>
+        <br>
+        <h2 class="profile-title">Hirdetéseid:</h2> 
     </div>
 
-    <!-- Line Separator -->
-    <div class="separator"></div>
 
-    <!-- Lower Block: User Adverts -->
-    <div class="user-adverts">
-        <h2>Hirdetéseim</h2>
-        {% for item in items_for_sale %}
-            <div class="card">
-                <img src="{{ item.image_url }}" alt="{{ item.name }}" class="card-image">
-                <h3>{{ item.name }}</h3>
-                <p>{{ item.description }}</p>
-            </div>
-        {% endfor %}
+    <div id="profile-edit" style="display: none;">
+        <div class="profile-info">
+            <h2 class="profile-title">Fiók adatok:</h2> 
+            <form method="post" id="edit-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save</button>
+            </form>
+            <div class="profile-line"></div>
+            <br>
+            <h2 class="profile-title">Hirdetéseid:</h2> 
+        </div>
     </div>
+
+
+
+    {% for product in products %}
+    <div class="profile-card profile-products">
+        <div>
+            <img class="thumbnail" src="{{ product.imageURL }}">
+        </div>
+        <div>
+            <h2>Termék neve: {{product.name}}</h2>
+            <p>Leírás: {{product.description}}</p>
+        </div>
+    </div>
+    {% endfor %}
 </div>
+
 
 
 {% endblock %}
 
 {% block scripts %}
-    {# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+<script>
+    function toggleEdit() {
+        var profileInfo = document.getElementById("profile-info");
+        var profileEdit = document.getElementById("profile-edit");
+        
+        if (profileInfo.style.display === "none") {
+            profileInfo.style.display = "block";
+            profileEdit.style.display = "none";
+        } else {
+            profileInfo.style.display = "none";
+            profileEdit.style.display = "block";
+        }
+    }
+</script>
 {% endblock %}

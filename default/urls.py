@@ -12,4 +12,6 @@ urlpatterns = [
     path('checkout/', views.checkout, name="checkout"),
     path('<str:item_name>.html', views.item_detail, name='item_detail'),
     path('update_item/', views.updateItem, name="update_item"),
+    path('forum/', views.forum, name="forum"),
+    path('gyik/', views.gyik, name="gyik"),
 ]
