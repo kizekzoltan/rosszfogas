@@ -2,18 +2,32 @@
     Forgalomvezérlő a statikus oldalakhoz
     @package rosszfogas
 """
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.http import JsonResponse
 from django.contrib.auth import logout
+from .filters import ProductFilter
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
 
-# - Views
+
+
 def shop(request):
-    current_user = request.user
-    customer = Customer.objects.get(user=current_user)
+    if request.user.is_authenticated:
+        current_user = request.user
+        customer = get_object_or_404(Customer, user=current_user)
+    else:
+        customer = None
+
     products = Product.objects.all()
-    context = {'products':products, 'customer':customer}
+    
+    myFilter = ProductFilter(request.GET, queryset=products)
+    products = myFilter.qs
+    
+    context = {'products': products, 'customer': customer, 'myFilter': myFilter}
+    
     return render(request, 'default/shop.html', context)
+
 
 def kosar(request):
 

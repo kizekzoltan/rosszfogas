@@ -6,18 +6,56 @@
 
 {% block body %}
     
-<div class="row">
+<br>
+<div style="text-align: center;">
+    <h1 style="display: inline; align-items: center;">Üdvözlünk a <span style="color: #F77C01; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold;">Rosszfogás</span> weboldalán!</h1>
+</div>
+<br>
+<div style="margin-top: 50px;">
+    <hr>
+    <form method="get" class="row align-items-center">
+        {% csrf_token %}
+        <div class="col">
+            <label for="id_namecat">Keressen bármire:</label>
+            <div class="">
+                {{ myFilter.form.namecat }}
+            </div>
+        </div>
+        <div class="col">
+            <label for="id_min_price">Minimum ár:</label>
+            <div>
+                {{ myFilter.form.min_price }}
+            </div>
+        </div>
+        <div class="col">
+            <label for="id_max_price">Maximum ár:</label>
+            <div class="">
+                {{ myFilter.form.max_price }}
+            </div>
+        </div>
+        <div class="col-auto mt-1">
+            <button class="btn user-btn" type="submit"><i class='bx bx-search-alt bx-md' style="margin-bottom: 5px;"></i></button>
+        </div>
+        <div class="col-auto mt-1">
+            <a href="{% url 'shop' %}" class="btn back-btn"><i class='bx bx-arrow-back bx-md' style="margin-bottom: 5px;"></i></a>
+        </div>
+    </form>
+    <hr>
+</div>
+
+
+<div class="row" style="margin-top: 100px;">
     {% for product in products %}
     <div class="product-card col-lg-4 col-md-6">
         <div class="product-image">
         <a href="{% url 'item_detail' item_name=product.name %}"><img class="thumbnail" src="{{ product.imageURL }}"></a>
         </div>
         <div class="box-element product">
-            <h6><strong>{{product.name}}</strong></h6>
+            <h5><strong>{{product.name}}</strong></h5>
             <hr>
             <!-- <a class="btn btn-outline-success" >Részletek</a> -->
             <h4 style="display: inline-block;">{{product.price|floatformat:0|intcomma}} HUF</h4>
-            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart" style="display: inline-block;float: right;">Kosárba</button>
+            <button data-product={{product.id}} data-action="add" class="user-btn add-btn update-cart" style="display: inline-block;float: right; height: 38px;">Kosárba</button>
         </div>
     </div>
     {% endfor %}

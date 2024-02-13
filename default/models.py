@@ -4,6 +4,13 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import RegexValidator
 
+#
+
+from django.db.models.signals import pre_delete
+import os
+from django.conf import settings
+
+
 # Create your models here.
 
 class Customer(models.Model):
@@ -32,13 +39,6 @@ class Customer(models.Model):
 
 
 class Product(models.Model):
-    ALLAPOT_CHOICES = [
-        ('--válasszon--', '--Válasszon--'),
-        ('bontatlan', 'Bontatlan'),
-        ('újszerű', 'Újszerű'),
-        ('használt', 'Használt'),
-        ('megviselt', 'Megviselt'),
-    ]
     KATEGORIA_CHOICES = [
         ('--válasszon--', '--Válasszon--'),
         ('autó', 'Autó'),
@@ -53,7 +53,6 @@ class Product(models.Model):
     feladocim = models.CharField(max_length=100, null=True, blank=True)
     feladoorszag = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='default/images/')
-    allapot = models.CharField(max_length=50, choices=ALLAPOT_CHOICES, default='--válasszon--')
     kategoria = models.CharField(max_length=50, choices=KATEGORIA_CHOICES, default='--válasszon--')
     terms_checkbox = models.BooleanField(default=False)
     

@@ -4,6 +4,10 @@ body {
   padding-bottom: 150px;
 }
 
+.form-control{
+    height: 50px;
+}
+
 footer {
   bottom: 0;
   height: 100px
@@ -196,6 +200,23 @@ td {
     border: 2px solid #007bff;
 }
 
+.custom-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.back-btn{
+    background-color: #fff;
+    color: #555555;
+    border: 2px solid #555555;
+    border-radius: 5px;
+}
+
+.back-btn:hover {
+    background-color: #555555;
+    color: #fff;
+}
+
 .delete-btn {
     background-color: #fff;
     color: red;
@@ -217,11 +238,6 @@ td {
 
 .user-btn:hover {
     background-color: #F77C01;
-    color: #fff;
-}
-
-.custom-btn:hover {
-    background-color: #007bff;
     color: #fff;
 }
 
