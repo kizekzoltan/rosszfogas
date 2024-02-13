@@ -23,6 +23,11 @@ h6 {
     color: hsl(0, 0%, 30%);
 }
 
+td {
+    width: 150px; /* Set the width to your desired size */
+    padding: 5px; /* Add padding for better spacing */
+}
+
 .box-element {
     box-shadow: hsl(0, 0%, 80%) 0 0 16px;
     background-color: #fff;
@@ -98,6 +103,27 @@ h6 {
     display: inline-block;
     padding: 5px;
 }
+
+.form-field-name {
+    width: 150px;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.form-field-email {
+    width: 170px;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 50px;
+}
+
+.form-field-user {
+    width: 150px;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 15px;
+}
 .form-field img {
     width: 250px;
     display: inline-block;
@@ -170,6 +196,30 @@ h6 {
     border: 2px solid #007bff;
 }
 
+.delete-btn {
+    background-color: #fff;
+    color: red;
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: red;
+    color: #fff;
+}
+
+.user-btn {
+    background-color: #fff;
+    color: #F77C01;
+    border: 2px solid #F77C01;
+    border-radius: 5px;
+}
+
+.user-btn:hover {
+    background-color: #F77C01;
+    color: #fff;
+}
+
 .custom-btn:hover {
     background-color: #007bff;
     color: #fff;
@@ -196,11 +246,14 @@ h6 {
 }
 
 .profile-info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto;
-    /* Two rows */
-    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.profile-edit{
 }
 
 .profile-name {
@@ -221,7 +274,7 @@ h6 {
 
 .profile-card {
     background-color: #fff;
-    border: 2px solid black;
+    border: 0px solid black;
     border-radius: 5px;
     padding: 20px;
     margin-top: 20px;

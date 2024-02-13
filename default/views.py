@@ -9,8 +9,10 @@ from django.contrib.auth import logout
 
 # - Views
 def shop(request):
+    current_user = request.user
+    customer = Customer.objects.get(user=current_user)
     products = Product.objects.all()
-    context = {'products':products}
+    context = {'products':products, 'customer':customer}
     return render(request, 'default/shop.html', context)
 
 def kosar(request):

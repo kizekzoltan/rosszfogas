@@ -5,13 +5,14 @@
 from default.models import Customer, Product
 from django.db import IntegrityError
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegistrationForm, LoginForm, UserProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 def profile_view(request):
     current_user = request.user
@@ -24,7 +25,7 @@ def profile_view(request):
             form.save()
             return redirect('fiok')
     else:
-        form = UserProfileForm(instance=customer)  # Pass the instance to the form for editing
+        form = UserProfileForm(instance=customer)
         print(form.errors)
 
     return render(request, "account/fiok.html", {'customer': customer, 'products': products, 'form': form})
@@ -81,3 +82,24 @@ def user_login(request):
 def logout_view(request):
     logout(request)
     return redirect(reverse('bejelentkezes'))
+
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        product.delete()
+        return redirect('fiok')
+    return redirect('fiok')
+
+
+def delete_customer(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    try:
+        user = User.objects.get(id=customer.user_id)
+    except ObjectDoesNotExist:
+        return HttpResponse("Error: User not found", status=404)
+    
+    if request.method == 'POST':
+        user.delete()
+        customer.delete()
+        return redirect('regisztracio') 
+    return redirect('fiok')
