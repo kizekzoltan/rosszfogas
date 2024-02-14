@@ -2,13 +2,13 @@
     Forgalomvezérlő a fiók oldalakhoz
     @package rosszfogas
 """
-from default.models import Customer, Product
+from default.models import Customer, Product, Topic, Comment
 from django.db import IntegrityError
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import RegistrationForm, LoginForm, UserProfileForm
+from .forms import RegistrationForm, LoginForm, UserProfileForm, CommentForm, TopicForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -103,3 +103,31 @@ def delete_customer(request, customer_id):
         customer.delete()
         return redirect('regisztracio') 
     return redirect('fiok')
+
+def forum_cucc(request):
+    topics = Topic.objects.all()
+    if request.method == 'POST':
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.creator = request.user  # Assuming you have user authentication
+            topic.save()
+            return redirect('forumcucc')
+    else:
+        form = TopicForm()
+    return render(request, 'account/topic_list.html', {'topics': topics, 'form': form})
+
+def topic_detail(request, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)
+    comments = Comment.objects.filter(topic=topic)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.topic = topic
+            comment.commenter = request.user  # Assuming you have user authentication
+            comment.save()
+            return redirect('topic_detail', topic_id=topic.id)
+    else:
+        form = CommentForm()
+    return render(request, 'account/topic_detail.html', {'topic': topic, 'comments': comments, 'form': form})

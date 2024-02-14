@@ -1,0 +1,74 @@
+{% extends "default/layout.html" %}
+{% load static %}
+
+{% block sytlesheets %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {
+        text-align: left;
+        margin-bottom: 20px;
+        margin-left: 50px;
+    }
+    .topic {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+    }
+    .comments {
+        margin-top: 20px;
+    }
+    .comment {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block title %} {{topic.title}} {% endblock %}
+
+{% block body %}
+<div class="col-auto mt-1">
+    <a href="{% url 'forumcucc' %}" class="btn back-btn"><i class='bx bx-arrow-back bx-md' style="margin-bottom: 5px;"></i></a>
+</div>
+<div class="container">
+    <br>
+    <h1>{{ topic.title }}</h1>
+    <br>
+    <p>Istenigazából ide jön majd a leírás. Szép lesz az oldal, ügyes ez a GPT... Na de csak óvatosan!</p>
+    <br>
+    <div class="topic">
+        <p>Létrehozó: {{ topic.creator }}</p>
+        <p>Létrehozva ekkor: {{ topic.created_at }}</p>
+    </div>
+
+    <hr>
+        <h2>Kommentelj:</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Beküldés</button>
+        </form>
+    <hr>
+
+    <div class="comments">
+        <h2>Kommentek:</h2>
+        {% for comment in comments %}
+            <div class="comment">{{ comment.content }} - {{ comment.commenter }}</div>
+        {% endfor %}
+    </div>
+</div>
+    
+{% endblock %}
+
+{% block scripts %}
+    {# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+{% endblock %}

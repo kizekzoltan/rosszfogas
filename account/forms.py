@@ -28,3 +28,13 @@ class UserProfileForm(forms.ModelForm):
             'location': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 9012 Győr, Kiss utca 1.'}),
             'phone': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: +36201111111'}),
         }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+
+class TopicForm(forms.ModelForm):
+    class Meta:
+        model = Topic
+        fields = ['title']

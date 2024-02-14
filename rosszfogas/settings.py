@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'default',
     'account',
     'shop',
+    'forumcucc',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

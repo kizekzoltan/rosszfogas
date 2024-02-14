@@ -61,8 +61,5 @@ def item_detail(request, item_name):
 def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
-def forum(request):
-    return render(request, 'default/forum.html')
-
 def gyik(request):
     return render(request, 'default/gyik.html')
