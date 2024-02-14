@@ -46,18 +46,20 @@
 
 <div class="row" style="margin-top: 100px;">
     {% for product in products %}
-    <div class="product-card col-lg-4 col-md-6">
-        <div class="product-image">
-        <a href="{% url 'item_detail' item_name=product.name %}"><img class="thumbnail" src="{{ product.imageURL }}"></a>
+        {% if product.ordered is not True %}
+        <div class="product-card col-lg-4 col-md-6">
+            <div class="product-image">
+            <a href="{% url 'item_detail' item_name=product.name %}"><img class="thumbnail" src="{{ product.imageURL }}"></a>
+            </div>
+            <div class="box-element product">
+                <h5><strong>{{product.name}}</strong></h5>
+                <hr>
+                <!-- <a class="btn btn-outline-success" >Részletek</a> -->
+                <h4 style="display: inline-block;">{{product.price|floatformat:0|intcomma}} HUF</h4>
+                <button data-product={{product.id}} data-action="add" class="user-btn add-btn update-cart" style="display: inline-block;float: right; height: 38px;">Kosárba</button>
+            </div>
         </div>
-        <div class="box-element product">
-            <h5><strong>{{product.name}}</strong></h5>
-            <hr>
-            <!-- <a class="btn btn-outline-success" >Részletek</a> -->
-            <h4 style="display: inline-block;">{{product.price|floatformat:0|intcomma}} HUF</h4>
-            <button data-product={{product.id}} data-action="add" class="user-btn add-btn update-cart" style="display: inline-block;float: right; height: 38px;">Kosárba</button>
-        </div>
-    </div>
+        {% endif %}
     {% endfor %}
 </div>    
 
