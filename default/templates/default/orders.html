@@ -1,0 +1,18 @@
+{% extends "default/layout.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %} Kosár {% endblock %}
+
+{% block body %}
+
+{% for order in orders %}
+<h2>{{ order.name }}</h2>
+<!-- Display other order details as needed -->
+{% endfor %}
+
+{% endblock %}
+
+{% block scripts %}
+    {# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+{% endblock %}

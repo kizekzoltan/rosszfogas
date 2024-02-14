@@ -8,6 +8,7 @@
     <h1>Termék adatai:</h1>
     <h1>{{ product.name }}</h1>
     <p>{{ product.description }}</p>
+    <a href="{% url 'order' product.id  %}">Rendeld meg!</a>
 
 {% endblock %}
 
