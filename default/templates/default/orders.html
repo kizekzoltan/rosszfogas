@@ -1,0 +1,82 @@
+
+{% extends "default/layout.html" %}
+{% load static %}
+{% load humanize %}
+
+
+{% block title %} Fiók {% endblock %}
+{% block sytlesheets %}
+<style>
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+    }
+    .container {
+        position: relative;
+    }
+    .register-button {
+        width: 100%;
+        background-color: #fff;
+        color: #F77C01;
+        border: 2px solid #F77C01;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .register-button:hover {
+        background-color: #F77C01;
+        color: #fff
+    }
+
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+
+<div class="row">
+        <div class="col-lg-9 mx-auto" style="margin-top: 20px;">
+            <div class="box-element" id="form-wrapper">
+                <div id="user-info profile-info">
+                    <hr>
+                    <h3><strong>Rendeléseid:</strong></h3> 
+                    <hr>
+                    <br>
+
+                    {% for order in orders %}
+                    <hr>
+                    <div class="profile-card profile-products">
+                        <div class="mt-4">
+                            <img class="thumbnail" src="{{ order.imageURL }}">
+                        </div>
+                        <div>
+                            <h2>{{order.name}}</h2>
+                            <p>Leírás: {{order.description}}</p>
+                            <p>Ár: {{order.price|floatformat:0|intcomma}} HUF</p>
+                            <p>Feladó: {{ order.customer }}
+                                {% if order.ordered == True %}
+                                <p>Státusz: <span style="color: orange;"><strong>Feldolgozás alatt</strong></span></p>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

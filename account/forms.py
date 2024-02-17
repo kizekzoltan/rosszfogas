@@ -20,12 +20,21 @@ class LoginForm(forms.Form):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['name', 'email', 'firstname', 'lastname', 'location', 'phone',]
+        fields = ['email', 'firstname', 'lastname', 'location', 'phone',]
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: bimbo'}),
             'email': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: bimbo@gmail.com'}),
             'firstname': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Varga'}),
             'lastname': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Bimbó'}),
             'location': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 9012 Győr, Kiss utca 1.'}),
             'phone': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: +36201111111'}),
         }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+
+class TopicForm(forms.ModelForm):
+    class Meta:
+        model = Topic
+        fields = ['title']

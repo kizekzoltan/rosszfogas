@@ -1,0 +1,78 @@
+{% extends "default/layout.html" %}
+{% load static %}
+
+{% block sytlesheets %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        background-color: #f9f9f9;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    li a {
+        text-decoration: none;
+        color: #333;
+    }
+</style>
+{% endblock %}
+
+{% block title %} Fórum {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Témák:</h1>
+    <button onclick="toggleForm()">Téma létrehozása</button>
+    <div id="topicForm" style="display: none;">
+        <h2>Hozz létre témát:</h2>
+        <form method="post" action="{% url 'forumcucc' %}">
+            {% csrf_token %}
+            <label for="title">Cím:</label>
+            <input type="text" id="title" name="title">
+            <button type="submit">Létrehozás</button>
+        </form>
+        <hr>
+    </div>
+    <ul>
+        {% for topic in topics %}
+        <a href="{% url 'topic_detail' topic.id %}" style="text-decoration: none; color: black;">
+            <li>
+                <p>Cím: {{ topic.title }}</p>
+                <p>Srácok ti is észrevettétek, hogy manapság egyre rosszabb a fórumok minősége? Ezért csináltunk egyet mi is. Na de csak ügyesen!</p>
+                </a>
+                <p style="float: right;">Létrehozó: {{ topic.creator }} / Létrehozva: {{ topic.created_at }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function toggleForm() {
+        var form = document.getElementById('topicForm');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
+</script>
+{% endblock %}

@@ -3,6 +3,13 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import RegexValidator
+from django.urls import reverse
+#
+
+from django.db.models.signals import pre_delete
+import os
+from django.conf import settings
+
 
 # Create your models here.
 
@@ -25,20 +32,11 @@ class Customer(models.Model):
             )
         ]
     )
-
-
     def __str__(self):
         return self.name
 
 
 class Product(models.Model):
-    ALLAPOT_CHOICES = [
-        ('--válasszon--', '--Válasszon--'),
-        ('bontatlan', 'Bontatlan'),
-        ('újszerű', 'Újszerű'),
-        ('használt', 'Használt'),
-        ('megviselt', 'Megviselt'),
-    ]
     KATEGORIA_CHOICES = [
         ('--válasszon--', '--Válasszon--'),
         ('autó', 'Autó'),
@@ -53,9 +51,13 @@ class Product(models.Model):
     feladocim = models.CharField(max_length=100, null=True, blank=True)
     feladoorszag = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='default/images/')
-    allapot = models.CharField(max_length=50, choices=ALLAPOT_CHOICES, default='--válasszon--')
     kategoria = models.CharField(max_length=50, choices=KATEGORIA_CHOICES, default='--válasszon--')
     terms_checkbox = models.BooleanField(default=False)
+
+    orderer_name = models.CharField(max_length=200, null=True, blank=True)
+    orderer_phone = models.CharField(max_length=12, null=True, blank=True)
+    orderer_location = models.CharField(max_length=200, null=True, blank=True)
+    ordered = models.BooleanField(default=False)
     
     def __str__(self):
         return self.name
@@ -112,3 +114,25 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+
+
+class Topic(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('topic_detail', args=[str(self.id)])
+
+class Comment(models.Model):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Comment by {self.commenter.username} on {self.topic.title}"

@@ -1,0 +1,26 @@
+{% extends "default/layout.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %} Kosár {% endblock %}
+
+{% block body %}
+
+<form method="POST" action="{% url 'place_order' product.id %}">
+    {% csrf_token %}
+    <!-- Product details -->
+    <h2>{{ product.name }}</h2>
+    <p>Price: {{ product.price }}</p>
+    <!-- Customer details -->
+    <input type="text" name="orderer_name" value="{{ customer.name }}">
+    <input type="text" name="orderer_phone" value="{{ customer.phone }}">
+    <input type="text" name="orderer_location" value="{{ customer.location }}">
+    <!-- Additional fields as needed -->
+    <button type="submit">Place Order</button>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+    {# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+{% endblock %}

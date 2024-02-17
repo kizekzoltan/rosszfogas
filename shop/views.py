@@ -28,7 +28,6 @@ def hirdetes_letrehozasa(request):
                 feladocim = form.cleaned_data['feladocim'],
                 feladoorszag = form.cleaned_data['feladoorszag'],
                 kategoria = form.cleaned_data['kategoria'],
-                allapot = form.cleaned_data['allapot'],
                 customer=request.user.customer
             )
             product.save()

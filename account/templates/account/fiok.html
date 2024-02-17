@@ -2,61 +2,117 @@
 {% load static %}
 
 {% block title %} Fiók {% endblock %}
+{% block sytlesheets %}
+<style>
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+    }
+    .container {
+        position: relative;
+    }
+    .register-button {
+        width: 100%;
+        background-color: #fff;
+        color: #F77C01;
+        border: 2px solid #F77C01;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .register-button:hover {
+        background-color: #F77C01;
+        color: #fff
+    }
+
+</style>
+
+{% endblock %}
+
 
 {% block body %}
 
 
-
-    <div class="profile-container">
-        <h1 class="profile-name" >Üdvözlünk {{ customer.name }}!</h1>
-    <div class="profile-info" id="profile-info">
-        <h2 class="profile-title">Fiók adatok:</h2> 
-        <div class="profile-info-item" id="name-info">
-            <p>Full name: {{ customer.firstname }} {{ customer.lastname }}</p>
-            <p>Email cím: {{ customer.email }}</p>
-        </div>
-        <div class="profile-info-item" id="phone-info">
-            <p>Telefonszám: {{ customer.phone }}</p>
-        </div>
-        <div class="profile-info-item" id="location-info">
-            <p>Lakcím: {{ customer.location }}</p>
-        </div>
-        <button onclick="toggleEdit()">Edit</button>
-        <div class="profile-line"></div>
-        <br>
-        <h2 class="profile-title">Hirdetéseid:</h2> 
-    </div>
+<div class="row">
+        <div class="col-lg-9 mx-auto" style="margin-top: 20px;">
+            <div class="box-element" id="form-wrapper">
+                <div id="user-info profile-info">
+                    <br>
+                    <h2 style="text-align: center;"><strong>Üdvözlünk {{ customer.name }}!</strong></h2>
+                    <br>
+                    <hr>
+                    <h3><strong>Fiók adatok:</strong></h3>
+                    <hr>
 
 
-    <div id="profile-edit" style="display: none;">
-        <div class="profile-info">
-            <h2 class="profile-title">Fiók adatok:</h2> 
-            <form method="post" id="edit-form">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Save</button>
-            </form>
-            <div class="profile-line"></div>
-            <br>
-            <h2 class="profile-title">Hirdetéseid:</h2> 
-        </div>
-    </div>
+                    <div class="profile-info" id="profile-info">
+                        <div class="form-field-name">
+                            <label>Teljes Név:</label>
+                            {{ customer.firstname }} {{ customer.lastname }}
+                        </div>
+                        <div class="form-field-email">
+                            <label>Email cím:</label>
+                            {{ customer.email }}
+                        </div>
+                        <div class="form-field-user" style="margin-left: 65px; width: 150px;">
+                            <label>Telefonszám:</label>
+                            {{ customer.phone }}
+                        </div>
+                        <div class="form-field-user" style="margin-left: 10px;">
+                            <label>Lakcím:</label>
+                            {{ customer.location }}
+                        </div>
+                        <button class="user-btn" style="margin-bottom: 25px; margin-top: 15px; float: right;" onclick="toggleEdit()">Szerkesztés</button>
+                    </div>
 
 
 
-    {% for product in products %}
-    <div class="profile-card profile-products">
-        <div>
-            <img class="thumbnail" src="{{ product.imageURL }}">
+                    <div id="profile-edit" style="display: none;">
+                        <div> 
+                            <form method="post" action="{% url 'fiok' %}">
+                                {% csrf_token %}
+                                {{ form.as_table }}
+                                <button class="user-btn mx-auto" style="margin-bottom: 25px; margin-top: 15px;" type="submit">Mentés</button>
+                            </form>
+                            <form action="{% url 'delete_customer' customer.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="delete-btn" type="submit" onclick="confirmDelete()">Fiók törlése</button>
+                            </form>
+                            <div class="profile-line"></div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <h3><strong>Hirdetéseid:</strong></h3> 
+                    <hr>
+                    <br>
+
+                    {% for product in products %}
+                    <hr>
+                    <div class="profile-card profile-products">
+                        <div>
+                            <img class="thumbnail" src="{{ product.imageURL }}">
+                        </div>
+                        <div>
+                            <h2>{{product.name}}</h2>
+                            <p>Leírás: {{product.description}}</p>
+                            <form action="{% url 'delete_product' product.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="delete-btn" type="submit">Termék törlése</button>
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+
+
+
+                </div>
+            </div>
         </div>
-        <div>
-            <h2>Termék neve: {{product.name}}</h2>
-            <p>Leírás: {{product.description}}</p>
-        </div>
-    </div>
-    {% endfor %}
 </div>
-
 
 
 {% endblock %}
@@ -73,6 +129,13 @@
         } else {
             profileInfo.style.display = "none";
             profileEdit.style.display = "block";
+        }
+    }
+</script>
+<script>
+    function confirmDelete() {
+        if (confirm("Biztosan törölni szeretnéd a fiókodat? Később nem tudod visszaállítani.")) {
+            document.getElementById('deleteForm').submit();
         }
     }
 </script>

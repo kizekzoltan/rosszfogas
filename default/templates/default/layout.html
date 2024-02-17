@@ -74,7 +74,7 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'forum' %}">
+                            <a class="nav-link active" href="{% url 'forumcucc' %}">
                                 <i class='bx bxs-conversation'></i>
                                 <strong>Fórum</strong>
                             </a>
@@ -89,8 +89,9 @@
                           <i id="user-icon" class='bx bxs-user-circle bx-md'></i>
                         </button>
                         <div id="dropdown-menu" class="dropdown-content">
-                          <a href="{% url 'fiok' %}">Profilom</a>
-                          <a href="{% url 'hirdetes_letrehozasa' %}">Hirdetés</a>
+                          <a href="{% url 'fiok' %}">Profil</a>
+                          <a href="{% url 'hirdetes_letrehozasa' %}">Hirdetés feladás</a>
+                          <a href="{% url 'orders' %}">Rendelések</a>
                           <a href="{% url 'logout' %}">Kijelentkezés</a>
                         </div>
                       </div>

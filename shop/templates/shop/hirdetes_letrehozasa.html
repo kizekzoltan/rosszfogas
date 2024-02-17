@@ -53,7 +53,7 @@
 <div class="row">
     <form id="form" method="post" action="{% url 'hirdetes_letrehozasa' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="col-lg-8 mx-auto">
+        <div class="col-lg-8 mx-auto" style="margin-top: 20px;">
             <div class="box-element" id="form-wrapper">
                 <div id="user-info">
                     <br>
@@ -62,7 +62,7 @@
                     <hr>
                     <h3><strong>Termék adatok:</strong></h3>
                     <hr>
-                    <div class="form-field">
+                    <div class="form-field-desc">
                         <label>Hirdetés címe:</label>
                         {{ form.name }}
                     </div>
@@ -77,10 +77,6 @@
                     <div class="form-field">
                         <label>Kategória:</label>
                         {{ form.kategoria }}
-                    </div>
-                    <div class="form-field">
-                        <label>Állapot:</label>
-                        {{ form.allapot }}
                     </div>
                     <hr>
                     <h3><strong>Feladó adatai:</strong></h3>
