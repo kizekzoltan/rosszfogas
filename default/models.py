@@ -45,9 +45,9 @@ class Product(models.Model):
     ]
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=50, null=True, blank=True)
     price = models.FloatField()
-    description = models.TextField()
+    description = models.TextField(max_length=80)
     feladocim = models.CharField(max_length=100, null=True, blank=True)
     feladoorszag = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='default/images/')
@@ -119,7 +119,8 @@ class ShippingAddress(models.Model):
 
 class Topic(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=20, null=True)
+    leiras = models.CharField(max_length=75, null=True, blank=True, default="Ehhez a témához nem tartozik leírás")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -128,10 +129,11 @@ class Topic(models.Model):
     def get_absolute_url(self):
         return reverse('topic_detail', args=[str(self.id)])
 
+
 class Comment(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     commenter = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.TextField(max_length=75, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -86,7 +86,7 @@
                     {% if user.is_authenticated %}
                     <div class="dropdown" style="display: inline-block;">
                         <button onclick="toggleDropdown()" class="dropbtn">
-                          <i id="user-icon" class='bx bxs-user-circle bx-md'></i>
+                          <i id="cart-icon" class='bx bxs-user-circle bx-md'></i>
                         </button>
                         <div id="dropdown-menu" class="dropdown-content">
                           <a href="{% url 'fiok' %}">Profil</a>
@@ -95,9 +95,6 @@
                           <a href="{% url 'logout' %}">Kijelentkezés</a>
                         </div>
                       </div>
-                      <a href="{% url 'kosar' %}"  style="text-decoration: none;">
-                        <i id="cart-icon" class='bx bxs-cart bx-md'></i>
-                      </a>
                     {% endif %}
 
                     {% if request.path != regisztracio_url and request.path != bejelentkezes_url and not user.is_authenticated %}

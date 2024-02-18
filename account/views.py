@@ -106,16 +106,18 @@ def delete_customer(request, customer_id):
 
 def forum_cucc(request):
     topics = Topic.objects.all()
+    current_user = request.user
+    customer = Customer.objects.get(user=current_user)
     if request.method == 'POST':
         form = TopicForm(request.POST)
         if form.is_valid():
             topic = form.save(commit=False)
-            topic.creator = request.user  # Assuming you have user authentication
+            topic.creator = request.user
             topic.save()
             return redirect('forumcucc')
     else:
         form = TopicForm()
-    return render(request, 'account/topic_list.html', {'topics': topics, 'form': form})
+    return render(request, 'account/topic_list.html', {'topics': topics, 'form': form, 'customer': customer, 'current_user': current_user})
 
 def topic_detail(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
@@ -125,9 +127,17 @@ def topic_detail(request, topic_id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.topic = topic
-            comment.commenter = request.user  # Assuming you have user authentication
+            comment.commenter = request.user
             comment.save()
             return redirect('topic_detail', topic_id=topic.id)
     else:
         form = CommentForm()
     return render(request, 'account/topic_detail.html', {'topic': topic, 'comments': comments, 'form': form})
+
+
+def delete_topic(request, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)
+    if request.method == 'POST':
+        topic.delete()
+        return redirect('forumcucc')
+    return redirect('forumcucc')

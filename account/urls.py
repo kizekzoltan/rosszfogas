@@ -15,4 +15,5 @@ urlpatterns = [
     path('delete_customer/<int:customer_id>/', views.delete_customer, name='delete_customer'),
     path('forum', views.forum_cucc, name="forumcucc"),
     path('topic/<int:topic_id>/', views.topic_detail, name="topic_detail"),
+    path('delete_topic/<int:topic_id>/', views.delete_topic, name='delete_topic'),
 ]

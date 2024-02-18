@@ -3,32 +3,6 @@
 
 {% block sytlesheets %}
 <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        background-color: #f9f9f9;
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 5px;
-    }
-    li a {
-        text-decoration: none;
-        color: #333;
-    }
 </style>
 {% endblock %}
 
@@ -36,31 +10,94 @@
 
 {% block body %}
 
-<div class="container">
-    <h1>Témák:</h1>
-    <button onclick="toggleForm()">Téma létrehozása</button>
-    <div id="topicForm" style="display: none;">
-        <h2>Hozz létre témát:</h2>
-        <form method="post" action="{% url 'forumcucc' %}">
-            {% csrf_token %}
-            <label for="title">Cím:</label>
-            <input type="text" id="title" name="title">
-            <button type="submit">Létrehozás</button>
-        </form>
-        <hr>
+
+<div class="row">
+    <div class="col-lg-9 mx-auto" style="margin-top: 20px;">
+        <div class="box-element" id="form-wrapper">
+            <div id="user-info profile-info">
+                <br>
+                <h2 style="text-align: center;"><strong>Üdvözlünk a fórumon {{ customer.name }}!</strong></h2>
+                <br>
+                <hr>
+                <h3><strong></strong></h3>
+                <hr>
+
+                <h3>Hozz létre saját témát:</h3>
+                <button onclick="toggleForm()" class="user-btn">Téma létrehozása</button>
+                <div id="topicForm" style="display: none;">
+                    <h2>Hozz létre témát:</h2>
+                    <form method="post" action="{% url 'forumcucc' %}">
+                        {% csrf_token %}
+                        <label for="title">Cím:</label>
+                        <input type="text" id="title" name="title">
+                        <label for="title">Bővebb leírás:</label>
+                        <input type="text" id="leiras" name="leiras">
+                        <button type="submit" class="user-btn">Közzététel</button>
+                    </form>
+                    <hr>
+                </div>
+                
+                <hr>
+                <h3><strong>Saját témák:</strong></h3> 
+                <hr>
+                <br>
+                {% for topic in topics %}
+                {% if topic.creator == current_user %}
+                    
+                    <hr>
+                    <a href="{% url 'topic_detail' topic.id %}" style="text-decoration: none; color: black;">
+                        <li>
+                            <p>Cím: {{ topic.title }}</p>
+                            <p>{{topic.leiras}}</p>
+                            </a>
+                            <form action="{% url 'delete_topic' topic.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="delete-btn" type="submit">Téma törlése</button>
+                            </form>
+                            <p style="float: right;">Létrehoztad: {{ topic.created_at }}</p>
+                        </li>
+                        <br>
+                    <hr>
+                    
+                {% endif %}
+                {% endfor %}
+
+                <hr>
+                <h3><strong>További témák:</strong></h3> 
+                <hr>
+                <br>
+
+                {% for topic in topics %}
+                {% if topic.creator != current_user %}
+                
+                    <hr>
+                    <a href="{% url 'topic_detail' topic.id %}" style="text-decoration: none; color: black;">
+                        <li>
+                            <p>Cím: {{ topic.title }}</p>
+                            <p>{{topic.leiras}}</p>
+                            </a>
+                            <p style="float: right;">Létrehozó: {{ topic.creator }} / Létrehozva: {{ topic.created_at }}</p>
+                        </li>
+                        <br>
+                    <hr>
+                
+                {% endif %}
+                {% endfor %}
+
+
+
+            </div>
+        </div>
     </div>
-    <ul>
-        {% for topic in topics %}
-        <a href="{% url 'topic_detail' topic.id %}" style="text-decoration: none; color: black;">
-            <li>
-                <p>Cím: {{ topic.title }}</p>
-                <p>Srácok ti is észrevettétek, hogy manapság egyre rosszabb a fórumok minősége? Ezért csináltunk egyet mi is. Na de csak ügyesen!</p>
-                </a>
-                <p style="float: right;">Létrehozó: {{ topic.creator }} / Létrehozva: {{ topic.created_at }}</p>
-            </li>
-        {% endfor %}
-    </ul>
 </div>
+
+
+
+
+
+
+
+
 
 {% endblock %}
 

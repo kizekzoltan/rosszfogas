@@ -37,4 +37,10 @@ class CommentForm(forms.ModelForm):
 class TopicForm(forms.ModelForm):
     class Meta:
         model = Topic
-        fields = ['title']
+        fields = ['title', 'leiras']
+
+    def clean_leiras(self):
+        leiras = self.cleaned_data.get('leiras')
+        if not leiras:
+            return "*Ehhez a témához nem tartozik leírás*"
+        return leiras
