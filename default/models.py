@@ -16,11 +16,11 @@ from django.conf import settings
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, null=True)
-    email = models.CharField(max_length=200, null=True)
-    firstname = models.CharField(max_length=200, null=True , default="")
-    lastname = models.CharField(max_length=200, null=True , default="")
-    location = models.CharField(max_length=200, null=True, default="")
-    phone = models.CharField(
+    Email = models.CharField(max_length=200, null=True)
+    Vezetéknév = models.CharField(max_length=200, null=True , default="")
+    Keresztnév = models.CharField(max_length=200, null=True , default="")
+    Lakcím = models.CharField(max_length=200, null=True, default="")
+    Telefonszám = models.CharField(
         max_length=12,
         null=True,
         default="",
