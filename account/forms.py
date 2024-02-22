@@ -20,13 +20,13 @@ class LoginForm(forms.Form):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['email', 'firstname', 'lastname', 'location', 'phone',]
+        fields = ['Email', 'Vezetéknév', 'Keresztnév', 'Lakcím', 'Telefonszám',]
         widgets = {
-            'email': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: bimbo@gmail.com'}),
-            'firstname': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Varga'}),
-            'lastname': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Bimbó'}),
-            'location': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 9012 Győr, Kiss utca 1.'}),
-            'phone': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: +36201111111'}),
+            'Email': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: bimbo@gmail.com'}),
+            'Vezetéknév': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Varga'}),
+            'Keresztnév': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Bimbó'}),
+            'Lakcím': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 9012 Győr, Kiss utca 1.'}),
+            'Telefonszám': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: +36201111111'}),
         }
 
 class CommentForm(forms.ModelForm):
