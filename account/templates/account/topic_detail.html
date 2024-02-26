@@ -36,37 +36,91 @@
 {% block title %} {{topic.title}} {% endblock %}
 
 {% block body %}
-<div class="col-auto mt-1">
-    <a href="{% url 'forumcucc' %}" class="btn back-btn"><i class='bx bx-arrow-back bx-md' style="margin-bottom: 5px;"></i></a>
-</div>
-<div class="container">
-    <br>
-    <h1>{{ topic.title }}</h1>
-    <br>
-    <p>Istenigazából ide jön majd a leírás. Szép lesz az oldal, ügyes ez a GPT... Na de csak óvatosan!</p>
-    <br>
-    <div class="topic">
-        <p>Létrehozó: {{ topic.creator }}</p>
-        <p>Létrehozva ekkor: {{ topic.created_at }}</p>
-    </div>
 
-    <hr>
-        <h2>Kommentelj:</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Beküldés</button>
-        </form>
-    <hr>
 
-    <div class="comments">
-        <h2>Kommentek:</h2>
-        {% for comment in comments %}
-            <div class="comment">{{ comment.content }} - {{ comment.commenter }}</div>
-        {% endfor %}
+
+
+
+
+<div class="row">
+    <div class="col-lg-12 mx-auto" style="margin-top: 20px;">
+        <div class="box-element" id="form-wrapper">
+            <div id="user-info profile-info">
+                
+
+
+
+
+                <div class="col-auto mt-1">
+                    <a href="{% url 'forumcucc' %}" class="btn back-btn"><i class='bx bx-arrow-back bx-md' style="margin-bottom: 5px;"></i></a>
+                </div>
+                <div class="container">
+                    <br>
+                    <h1>{{ topic.title }}</h1>
+                    <br>
+                    <p>{{ topic.leiras }}</p>
+                    <br>
+                    <div class="topic">
+                        <p>Létrehozó: {{ topic.creator }}</p>
+                        <p>Létrehozva ekkor: {{ topic.created_at }}</p>
+                    </div>
+                
+                    <hr>
+                        <h2>Kommentelj:</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Beküldés</button>
+                        </form>
+                    <hr>
+                        
+
+                        <!--  EZ megy felulre
+                            <div id="topicForm" style="display: none;">
+                    <h2>Hozz létre témát:</h2>
+                    <form method="post" action="{% url 'forumcucc' %}">
+                        {% csrf_token %}
+                        <label for="title">Cím:</label>
+                        <input type="text" id="title" name="title">
+                        <label for="title">Bővebb leírás:</label>
+                        <input type="text" id="leiras" name="leiras">
+                        <button type="submit" class="user-btn">Közzététel</button>
+                    </form>
+                    <hr>
+                </div>
+                        -->
+
+
+                    <div class="comments">
+                        <h2>Kommentek:</h2>
+                        {% for comment in comments %}
+                            <div class="comment">{{ comment.content }} - {{ comment.commenter }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
     </div>
 </div>
-    
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
 
 {% block scripts %}
