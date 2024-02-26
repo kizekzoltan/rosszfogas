@@ -91,6 +91,7 @@
 
                     {% for product in products %}
                     <hr>
+                    {% if not product.ordered %}
                     <div class="profile-card profile-products">
                         <div>
                             <img class="thumbnail" src="{{ product.imageURL }}">
@@ -98,10 +99,22 @@
                         <div>
                             <h2>{{product.name}}</h2>
                             <p>Leírás: {{product.description}}</p>
-                            <form action="{% url 'delete_product' product.id %}" method="post">
-                                {% csrf_token %}
-                                <button class="delete-btn" type="submit">Termék törlése</button>
-                            </form>
+                                <form action="{% url 'delete_product' product.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="delete-btn" type="submit">Termék törlése</button>
+                                </form>
+                    {% else %}
+                    <div class="profile-card profile-products">
+                        <div>
+                            <img class="thumbnail" src="{{ product.imageURL }}">
+                        </div>
+                        <div>
+                            <h3>Rendelő: {{product.orderer_name }}</h3>
+                            <br>
+                            <p>Rendelő telefonszáma: {{product.orderer_phone}}</p>
+                            <p>Rendelő lakcíme: {{product.orderer_location}}</p>
+                            <button class="user-btn" type="submit">Termék feladása</button>
+                    {% endif %}
                         </div>
                     </div>
                     <hr>

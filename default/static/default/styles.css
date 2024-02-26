@@ -470,13 +470,13 @@ textarea {
 .dropdown:hover .dropbtn {
   background-color: #f9f9f9;
 }
-.row {
+.rowrolunk {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-.card {
+.cardrolunk {
     width: calc((100% - 60px) / 2); /* Adjusted width to fit two cards in a row */
     height: 20rem; /* Adjusted height for smaller cards */
     border-radius: 10px;
@@ -526,19 +526,19 @@ textarea {
     text-decoration: none;
 }
 
-.card:hover .rolunkh2 {
+.cardrolunk:hover .rolunkh2 {
     opacity: 0;
     transition: opacity 0.3s ease-out;
 }
 
 
-.card:hover .rolunkimg {
+.cardrolunk:hover .rolunkimg {
     transition: opacity .3s ease-in;
     opacity: 1;
 }
 
-.card:hover .rolunkp,
-.card:hover .rolunka {
+.cardrolunk:hover .rolunkp,
+.cardrolunk:hover .rolunka {
     opacity: 1;
     transition: opacity .3s ease-out;
 }

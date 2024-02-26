@@ -1,14 +1,49 @@
 {% extends "default/layout.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block title %} {{product.name}} {% endblock %}
 
 {% block body %}
+    <div class="row">
+        <div class="col-lg-12 mx-auto" style="margin-top: 20px;">
+            <div class="box-element" id="form-wrapper">
+                <div id="user-info profile-info">
+                    <div class="container">
+                        
+                        <br>
+                        <h3>Termék neve: {{ product.name }}</h3>
+                        <br>
+                        <div class="product-image">
+                            <a href="{% url 'item_detail' item_name=product.name %}"><img style="width: 20%; height: 20%; border: 1px solid black; border-radius: 5px;" src="{{ product.imageURL }}"></a>
+                        </div>
+                        <br>
+                        <h4>Termék leírása: {{ product.description }}</h4>
+                        <br>
+                        <p>Ár: {{ product.price|floatformat:0|intcomma }} HUF</p>
+                        
+                        {% if product.customer %}
+                        {% if product.customer.Vezetéknév and product.customer.Keresztnév %}
+                            <p>Feladó: {{ product.customer.Vezetéknév }} {{ product.customer.Keresztnév }}</p>
+                        {% else %}
+                            <p>Feladó: {{ product.customer.name }}</p>
+                        {% endif %}
+                        {% else %}
+                            <p>Feladó: Nincs megadva</p>
+                        {% endif %}
+                        {% if user.is_authenticated and product.customer.user != user %}
+                            <a href="{% url 'order' product.id  %}">
+                                <button type="submit" class="user-btn"><strong>Rendeld meg!</strong></button>
+                            </a>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <h1>Termék adatai:</h1>
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.description }}</p>
-    <a href="{% url 'order' product.id  %}">Rendeld meg!</a>
+
 
 {% endblock %}
 
