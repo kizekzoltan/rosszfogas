@@ -92,3 +92,6 @@ def orders(request):
         'orders': orders
     }
     return render(request, 'default/orders.html', context)
+
+def rolunk(request):
+    return render(request, 'default/rolunk.html')

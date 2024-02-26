@@ -16,4 +16,5 @@ urlpatterns = [
     path('product/<int:product_id>/order/', views.order, name='order'),
     path('product/<int:product_id>/place_order/', views.place_order, name='place_order'),
     path('orders/', views.orders, name='orders'),
+    path('rolunk/', views.rolunk, name='rolunk'),
 ]
