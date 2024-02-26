@@ -269,8 +269,6 @@ td {
     align-items: stretch;
 }
 
-.profile-edit{
-}
 
 .profile-name {
     margin: 0 auto;
@@ -471,4 +469,91 @@ textarea {
   /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #f9f9f9;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    width: calc((100% - 60px) / 2); /* Adjusted width to fit two cards in a row */
+    height: 20rem; /* Adjusted height for smaller cards */
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    color: #ececec;
+    box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
+}
+
+.rolunkimg {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+    transition: opacity .2s ease-out;
+}
+
+.rolunkh2 {
+    position: absolute;
+    inset: auto auto 30px 30px;
+    margin: 0;
+    transition: inset .3s .3s ease-out;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.rolunkp,
+.rolunka {
+    position: absolute;
+    opacity: 0;
+    max-width: 80%;
+    transition: opacity .3s ease-out;
+}
+
+.rolunkp {
+    inset: auto auto 80px 30px;
+}
+
+.rolunka {
+    inset: auto auto 40px 30px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.card:hover .rolunkh2 {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+
+.card:hover .rolunkimg {
+    transition: opacity .3s ease-in;
+    opacity: 1;
+}
+
+.card:hover .rolunkp,
+.card:hover .rolunka {
+    opacity: 1;
+    transition: opacity .3s ease-out;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+}
+
+.rolunkh1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #000;
 }
