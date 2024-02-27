@@ -51,7 +51,7 @@ def register(request):
 
             try:
                 user = User.objects.create_user(username=username, email=email, password=password)
-                customer = Customer.objects.create(user=user, name=username, email=Email)
+                customer = Customer.objects.create(user=user, name=username, email=email)
                 login(request, user)
 
             except IntegrityError:

@@ -69,7 +69,8 @@
                         <h2>Kommentelj:</h2>
                         <form method="post">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            <label for="title">Tartalom:</label>
+                            <input type="text" id="content" name="content">
                             <button type="submit">Beküldés</button>
                         </form>
                     <hr>

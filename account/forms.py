@@ -20,9 +20,9 @@ class LoginForm(forms.Form):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['Email', 'Vezetéknév', 'Keresztnév', 'Lakcím', 'Telefonszám',]
+        fields = ['email', 'Vezetéknév', 'Keresztnév', 'Lakcím', 'Telefonszám',]
         widgets = {
-            'Email': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: bimbo@gmail.com'}),
+            'email': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: bimbo@gmail.com'}),
             'Vezetéknév': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Varga'}),
             'Keresztnév': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Bimbó'}),
             'Lakcím': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 9012 Győr, Kiss utca 1.'}),
