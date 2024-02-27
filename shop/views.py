@@ -19,7 +19,6 @@ def hirdetes_letrehozasa(request):
     if request.method == 'POST':
         form = HirdetesForm(request.POST, request.FILES)
         if form.is_valid():
-            
             product = Product(
                 name=form.cleaned_data['name'],
                 price=form.cleaned_data['price'],
@@ -30,8 +29,12 @@ def hirdetes_letrehozasa(request):
                 kategoria = form.cleaned_data['kategoria'],
                 customer=request.user.customer
             )
-            product.save()
-            return redirect('fiok') 
+            if product.price < 1:
+                form.add_error('price', "Az ár nem lehet kevesebb 1 HUF-nál!")
+                return render(request, 'shop/hirdetes_letrehozasa.html', {'form': form})
+            else:
+                product.save()
+                return redirect('fiok') 
     else:
         form = HirdetesForm()
     return render(request, 'shop/hirdetes_letrehozasa.html', {'form': form})

@@ -7,7 +7,7 @@ class HirdetesForm(forms.ModelForm):
         fields = ['name', 'price', 'feladocim', 'feladoorszag', 'kategoria', 'description', 'image', 'terms_checkbox']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Samsung Galaxy S21'}),
-            'price': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 15000'}),
+            'price': forms.NumberInput(attrs={'class': 'input-field', 'placeholder': 'pl: 15000'}),
             'feladocim': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 9012 Győr, Kalapos utca 12.'}),
             'feladoorszag': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Magyarország'}),
             'kategoria': forms.Select(),
@@ -16,9 +16,6 @@ class HirdetesForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(HirdetesForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields['terms_checkbox'].label = 'Elfogadom a szerződési feltételeket'
-
-    def __init__(self, *args, **kwargs):
-        super(HirdetesForm, self).__init__(*args, **kwargs)
         self.fields['kategoria'].choices = Product.KATEGORIA_CHOICES
