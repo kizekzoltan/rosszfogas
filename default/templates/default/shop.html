@@ -49,7 +49,7 @@
         {% if product.ordered is not True %}
         <div class="product-card col-lg-4 col-md-6">
             <div class="product-image">
-            <a href="{% url 'item_detail' item_name=product.name %}"><img class="thumbnail" src="{{ product.imageURL }}"></a>
+            <a href="{% url 'item_detail' product_id=product.id %}"><img class="thumbnail" src="{{ product.imageURL }}"></a>
             </div>
             <div class="box-element product">
                 <h5><strong>{{product.name}}</strong></h5>

@@ -54,8 +54,8 @@ def checkout(request):
     context = {'items':items, 'order':order}
     return render(request, 'default/checkout.html', context)
 
-def item_detail(request, item_name):
-    product = get_object_or_404(Product, name=item_name)
+def item_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
     return render(request, 'default/item_detail.html', {'product': product})
 
 def updateItem(request):
