@@ -15,6 +15,14 @@ class HirdetesForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={'multiple': False}),
         }
 
+    def clean_image(self):
+        image = self.cleaned_data.get('image')
+        if image:
+            extension = image.name.split('.')[-1].lower()
+            if extension == 'gif':
+                raise forms.ValidationError("GIF-et nem tölthetsz fel.")
+        return image
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['terms_checkbox'].label = 'Elfogadom a szerződési feltételeket'

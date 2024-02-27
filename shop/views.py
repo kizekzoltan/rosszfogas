@@ -32,6 +32,13 @@ def hirdetes_letrehozasa(request):
             if product.price < 1:
                 form.add_error('price', "Az ár nem lehet kevesebb 1 HUF-nál!")
                 return render(request, 'shop/hirdetes_letrehozasa.html', {'form': form})
+            
+
+            extension = product.image.name.split('.')[-1].lower()
+            if extension == 'gif':
+                form.add_error('image', "Nem tölthetsz fel gif-et Söli!")
+                return render(request, 'shop/hirdetes_letrehozasa.html', {'form': form})
+            
             else:
                 product.save()
                 return redirect('fiok') 

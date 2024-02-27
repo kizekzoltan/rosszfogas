@@ -104,6 +104,9 @@
                     <div class="form-field">
                         <label for="{{ form.image.id_for_label }}"></label>
                         {{ form.image }}
+                        {% for error in form.image.errors %}
+                            <span class="error" style="color: red;"><strong>{{ error }}</strong></span>
+                        {% endfor %}
                         <img id="image-preview" src="#" alt="Image Preview" style="display:none; max-width: 200px; max-height: 200px;">
                     </div>
                 </div>
