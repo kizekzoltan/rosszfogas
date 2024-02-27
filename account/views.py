@@ -13,6 +13,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
+import os
+
 
 def profile_view(request):
     current_user = request.user
@@ -86,6 +89,10 @@ def logout_view(request):
 def delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     if request.method == 'POST':
+        if product.image:
+            image_path = os.path.join(settings.MEDIA_ROOT, str(product.image))
+            if os.path.exists(image_path):
+                os.remove(image_path)
         product.delete()
         return redirect('fiok')
     return redirect('fiok')
