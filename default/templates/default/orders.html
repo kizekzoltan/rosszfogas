@@ -60,10 +60,19 @@
                             <p>Leírás: {{order.description}}</p>
                             <p>Ár: {{order.price|floatformat:0|intcomma}} HUF</p>
                             <p>Feladó: {{ order.customer }}
-                                {% if order.ordered == True %}
+                                {% if order.ordered == True and order.sent == False %}
                                 <p>Státusz: <span style="color: orange;"><strong>Feldolgozás alatt</strong></span></p>
                                 {% endif %}
+                                {% if order.sent == True %}
+                                <p>Státusz: <span style="color: green"><strong>Elküldve</strong></span></p>
+                                {% endif %}
                             </p>
+                            {% if order.sent == True %}
+                            <form method="post" action="{% url 'received_product' order.id %}">
+                                {% csrf_token %}
+                                <button class="received-btn" type="submit">Terméket átvettem</button>
+                            </form>
+                            {% endif %}
                         </div>
                     </div>
                     <hr>

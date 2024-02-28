@@ -10,7 +10,9 @@
             <div class="box-element" id="form-wrapper">
                 <div id="user-info profile-info">
                     <div class="container">
-                        
+                        <div class="col-auto mt-1">
+                            <a href="{% url 'shop' %}" class="btn back-btn"><i class='bx bx-arrow-back bx-md' style="margin-bottom: 5px;"></i></a>
+                        </div>
                         <br>
                         <h3>Termék neve: {{ product.name }}</h3>
                         <br>

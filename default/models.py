@@ -42,6 +42,9 @@ class Product(models.Model):
         ('--válasszon--', '--Válasszon--'),
         ('autó', 'Autó'),
         ('élelmiszer', 'Élelmiszer'),
+        ('elektronika', 'Elektronika'),
+        ('bútor', 'Bútor'),
+        ('könyv', 'Könyv'),
         ('egyéb', 'Egyéb'),
     ]
 
@@ -59,6 +62,9 @@ class Product(models.Model):
     orderer_phone = models.CharField(max_length=12, null=True, blank=True)
     orderer_location = models.CharField(max_length=200, null=True, blank=True)
     ordered = models.BooleanField(default=False)
+
+    sent = models.BooleanField(default=False)
+    received = models.BooleanField(default=False)
     
     def __str__(self):
         return self.name

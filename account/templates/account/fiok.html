@@ -1,5 +1,6 @@
 {% extends "default/layout.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block title %} Fiók {% endblock %}
 {% block sytlesheets %}
@@ -54,7 +55,7 @@
                         </div>
                         <div class="form-field-email">
                             <label>Email cím:</label>
-                            {{ customer.Email }}
+                            {{ customer.email }}
                         </div>
                         <div class="form-field-user" style="margin-left: 65px; width: 150px;">
                             <label>Telefonszám:</label>
@@ -91,34 +92,40 @@
 
                     {% for product in products %}
                     <hr>
-                    {% if not product.ordered %}
                     <div class="profile-card profile-products">
                         <div>
                             <img class="thumbnail" src="{{ product.imageURL }}">
                         </div>
                         <div>
-                            <h2>{{product.name}}</h2>
-                            <p>Leírás: {{product.description}}</p>
+                            {% if not product.ordered %}
+                                <h3>{{ product.name }}</h3>
+                                <br>
+                                <h6>Leírás: {{ product.description }}</h6>
+                                <h6>Ár: {{ product.price|floatformat:0|intcomma }} HUF</h6>
                                 <form action="{% url 'delete_product' product.id %}" method="post">
                                     {% csrf_token %}
                                     <button class="delete-btn" type="submit">Termék törlése</button>
                                 </form>
-                    {% else %}
-                    <div class="profile-card profile-products">
-                        <div>
-                            <img class="thumbnail" src="{{ product.imageURL }}">
-                        </div>
-                        <div>
-                            <h3>Rendelő: {{product.orderer_name }}</h3>
-                            <br>
-                            <p>Rendelő telefonszáma: {{product.orderer_phone}}</p>
-                            <p>Rendelő lakcíme: {{product.orderer_location}}</p>
-                            <button class="user-btn" type="submit">Termék feladása</button>
-                    {% endif %}
+                            {% elif not product.sent %}
+                                <h3>A(z) {{ product.name }} termék <span style="color: #F77C01">megrendelve</span>!</h3>
+                                <br>
+                                <h6>Rendelő telefonszáma: {{ product.orderer_phone }}</h6>
+                                <h6>Rendelő lakcíme: {{ product.orderer_location }}</h6>
+                                <form method="post" action="{% url 'send_order' product.id %}">
+                                    {% csrf_token %}
+                                    <button class="user-btn" type="submit">Termék feladása</button>
+                                </form>
+                            {% else %}
+                                <h3>A(z) {{ product.name }} termék <span style="color: green;">sikeresen</span> feladva!</h3>
+                                <br>
+                                <h5>Rendelő: {{ product.orderer_name }}</h5>
+                                <h6>Rendelő telefonszáma: {{ product.orderer_phone }}</h6>
+                                <h6>Termék ára: {{ product.price|floatformat:0|intcomma }} HUF</h6>
+                            {% endif %}
                         </div>
                     </div>
                     <hr>
-                    {% endfor %}
+                {% endfor %}
 
 
 

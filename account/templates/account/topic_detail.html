@@ -71,12 +71,12 @@
                             {% csrf_token %}
                             <label for="title">Tartalom:</label>
                             <input type="text" id="content" name="content">
-                            <button type="submit">Beküldés</button>
+                            <button type="submit" class="user-btn">Beküldés</button>
                         </form>
                     <hr>
                         
 
-                        <!--  EZ megy felulre
+                        <!--  EZ megy felulre                             VÉGÜL VALAHOGY JÓ ÍGY IS AHOGY VAN DE HA ELBASZODNA ITTHAGYOM 
                     <div id="topicForm" style="display: none;">
                     <h2>Hozz létre témát:</h2>
                     <form method="post" action="{% url 'forumcucc' %}">
@@ -93,7 +93,7 @@
 
 
                     <div class="comments">
-                        <h2>Kommentek:</h2>
+                        <h2>Kommentek: ({{ num_comments }})</h2>
                         {% for comment in comments %}
                             <div class="comment">{{ comment.content }} - {{ comment.commenter }}</div>
                         {% endfor %}

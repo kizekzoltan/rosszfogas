@@ -15,5 +15,6 @@ class ProductFilter(django_filters.FilterSet):
     def filter_by_name_or_category(self, queryset, name, value):
         return queryset.filter(
             models.Q(name__icontains=value) |
-            models.Q(kategoria__icontains=value)
+            models.Q(kategoria__icontains=value) |
+            models.Q(description__icontains=value)
         )

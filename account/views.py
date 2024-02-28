@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
+from django.db.models import Count
+from .utils import send_registration_confirmation_email
 import os
 
 
@@ -55,6 +57,7 @@ def register(request):
             try:
                 user = User.objects.create_user(username=username, email=email, password=password)
                 customer = Customer.objects.create(user=user, name=username, email=email)
+                send_registration_confirmation_email(email)
                 login(request, user)
 
             except IntegrityError:
@@ -112,7 +115,7 @@ def delete_customer(request, customer_id):
     return redirect('fiok')
 
 def forum_cucc(request):
-    topics = Topic.objects.all()
+    topics = Topic.objects.annotate(num_comments=Count('comment'))
     current_user = request.user
     customer = Customer.objects.get(user=current_user)
     if request.method == 'POST':
@@ -129,6 +132,7 @@ def forum_cucc(request):
 def topic_detail(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
     comments = Comment.objects.filter(topic=topic)
+    num_comments = comments.count()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -139,7 +143,7 @@ def topic_detail(request, topic_id):
             return redirect('topic_detail', topic_id=topic.id)
     else:
         form = CommentForm()
-    return render(request, 'account/topic_detail.html', {'topic': topic, 'comments': comments, 'form': form})
+    return render(request, 'account/topic_detail.html', {'topic': topic, 'comments': comments, 'form': form, 'num_comments': num_comments})
 
 
 def delete_topic(request, topic_id):
@@ -148,3 +152,12 @@ def delete_topic(request, topic_id):
         topic.delete()
         return redirect('forumcucc')
     return redirect('forumcucc')
+
+
+def send_order(request, product_id):
+    if request.method == 'POST':
+        product = Product.objects.get(id=product_id)
+        product.sent = True
+        product.save()
+        
+        return redirect('fiok')

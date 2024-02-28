@@ -20,12 +20,11 @@
                 <br>
                 <hr>
                 <h3><strong></strong></h3>
-                <hr>
 
                 <h3>Hozz létre saját témát:</h3>
                 <button onclick="toggleForm()" class="user-btn">Téma létrehozása</button>
                 <div id="topicForm" style="display: none;">
-                    <h2>Hozz létre témát:</h2>
+                    <h2></h2>
                     <form method="post" action="{% url 'forumcucc' %}">
                         {% csrf_token %}
                         <label for="title">Cím:</label>
@@ -54,7 +53,7 @@
                                 {% csrf_token %}
                                 <button class="delete-btn" type="submit">Téma törlése</button>
                             </form>
-                            <p style="float: right;">Létrehoztad: {{ topic.created_at }}</p>
+                            <p style="float: right;">Létrehoztad: {{ topic.created_at }} / Kommentek száma: {{ topic.num_comments }}</p>
                         </li>
                         <br>
                     <hr>
@@ -76,7 +75,7 @@
                             <p>Cím: {{ topic.title }}</p>
                             <p>{{topic.leiras}}</p>
                             </a>
-                            <p style="float: right;">Létrehozó: {{ topic.creator }} / Létrehozva: {{ topic.created_at }}</p>
+                            <p style="float: right;">Létrehozó: {{ topic.creator }} / Létrehozva: {{ topic.created_at }} / Kommentek száma: {{ topic.num_comments }}</p>
                         </li>
                         <br>
                     <hr>

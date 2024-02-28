@@ -28,29 +28,6 @@ def shop(request):
     
     return render(request, 'default/shop.html', context)
 
-
-def kosar(request):
-
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-    else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0}
-
-    context = {'items':items, 'order':order}
-    return render(request, 'default/kosar.html', context)
-
-def checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-    else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0}
-
     context = {'items':items, 'order':order}
     return render(request, 'default/checkout.html', context)
 
@@ -82,7 +59,7 @@ def place_order(request, product_id):
         product.orderer_location = request.POST.get('orderer_location')
         product.ordered = True
         product.save()
-        
+
         return redirect('orders')
 
 def orders(request):
@@ -93,5 +70,18 @@ def orders(request):
     }
     return render(request, 'default/orders.html', context)
 
+
 def rolunk(request):
     return render(request, 'default/rolunk.html')
+
+
+def received_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        if product.image:
+            image_path = os.path.join(settings.MEDIA_ROOT, str(product.image))
+            if os.path.exists(image_path):
+                os.remove(image_path)
+        product.delete()
+        return redirect('orders')
+    return redirect('orders')

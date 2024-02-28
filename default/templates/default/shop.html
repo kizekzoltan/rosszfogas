@@ -56,7 +56,9 @@
                 <hr>
                 <!-- <a class="btn btn-outline-success" >Részletek</a> -->
                 <h4 style="display: inline-block;">{{product.price|floatformat:0|intcomma}} HUF</h4>
-                <button data-product={{product.id}} data-action="add" class="user-btn add-btn update-cart" style="display: inline-block;float: right; height: 38px;">Kosárba</button>
+                <a href="{% url 'item_detail' product_id=product.id %}" style="display: inline-block; float: right;">
+                    <button class="user-btn add-btn update-cart" style="height: 38px;">Részletek</button>
+                </a>
             </div>
         </div>
         {% endif %}

@@ -241,6 +241,20 @@ td {
     color: #fff;
 }
 
+
+
+.received-btn {
+    background-color: #fff;
+    color: green;
+    border: 2px solid green;
+    border-radius: 5px;
+}
+
+.received-btn:hover {
+    background-color: green;
+    color: #fff;
+}
+
 .vertical-line {
     border-left: 1px solid #ccc;
     height: 30px;
@@ -557,3 +571,7 @@ textarea {
     text-transform: uppercase;
     color: #000;
 }
+
+.mt-n4 {
+    margin-top: -2.5rem !important;
+  }

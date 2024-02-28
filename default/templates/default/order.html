@@ -6,18 +6,50 @@
 
 {% block body %}
 
-<form method="POST" action="{% url 'place_order' product.id %}">
-    {% csrf_token %}
-    <!-- Product details -->
-    <h2>{{ product.name }}</h2>
-    <p>Price: {{ product.price }}</p>
-    <!-- Customer details -->
-    <input type="text" name="orderer_name" value="{{ customer.name }}">
-    <input type="text" name="orderer_phone" value="{{ customer.phone }}">
-    <input type="text" name="orderer_location" value="{{ customer.location }}">
-    <!-- Additional fields as needed -->
-    <button type="submit">Place Order</button>
-</form>
+
+
+<div class="row">
+    <div class="col-lg-9 mx-auto" style="margin-top: 20px;">
+        <div class="box-element" id="form-wrapper">
+            <div id="user-info profile-info">
+                
+                <hr>
+                <h3><strong>Rendelés adatai:</strong></h3> 
+                <hr>
+                <br>
+                <div class="profile-card profile-products">
+                <div class="">
+                    <img class="thumbnail" src="{{ product.imageURL }}">
+                </div>
+                <div>
+                <h2>Termék neve: {{ product.name }}</h2>
+                <br>
+                <p>Termék ára: {{ product.price|floatformat:0|intcomma }}</p>
+                </div>
+                </div>
+                <hr>
+                <h3><strong>Saját adatok:</strong></h3>
+                <p>(alapértelmezett adatok, megváltoztatásuk csak erre a termékre vonatkozik)</p>
+                <hr>
+                <br>
+                <div class="profile-card profile-products">
+                <form method="POST" action="{% url 'place_order' product.id %}">
+                    <div class="mt-n4">
+                        {% csrf_token %}
+                        <label>Felhasználóneved:</label>
+                        <input type="text" name="orderer_name" value="{{ customer.name }}" readonly>
+                        <label>Telefonszámod:</label>
+                        <input type="text" name="orderer_phone" value="{{ customer.Telefonszám }}" pattern="[0-9+]*" maxlength="25">
+                        <label>Szállítási cím:</label>
+                        <input type="text" name="orderer_location" value="{{ customer.Lakcím }}">
+                        <button type="submit" class="user-btn">Megrendelés</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
