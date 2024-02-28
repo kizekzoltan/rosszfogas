@@ -60,8 +60,13 @@ def register(request):
                 send_registration_confirmation_email(email)
                 login(request, user)
 
-            except IntegrityError:
-                form.add_error('username', "Ezzel a felhasználóval már regisztráltak.")
+            except IntegrityError as e:
+                if 'UNIQUE constraint' in str(e) and 'username' in str(e):
+                    form.add_error('username', "This username is already registered.")
+                elif 'UNIQUE constraint' in str(e) and 'email' in str(e):
+                    form.add_error('email', "This email is already registered.")
+                else:
+                    form.add_error(None, "An error occurred. Please try again.")
                 return render(request, 'account/regisztracio.html', {'form': form})
             
             return redirect('shop')
