@@ -9,6 +9,7 @@ from django.contrib.auth import logout
 from .filters import ProductFilter
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
+from account.utils import send_order_confirmation_email
 
 
 
@@ -57,9 +58,10 @@ def place_order(request, product_id):
         product.orderer_name = request.POST.get('orderer_name')
         product.orderer_phone = request.POST.get('orderer_phone')
         product.orderer_location = request.POST.get('orderer_location')
+        product.orderer_email = request.POST.get('orderer_email')
         product.ordered = True
         product.save()
-
+        send_order_confirmation_email(product)
         return redirect('orders')
 
 def orders(request):

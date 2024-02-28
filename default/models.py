@@ -61,6 +61,7 @@ class Product(models.Model):
     orderer_name = models.CharField(max_length=200, null=True, blank=True)
     orderer_phone = models.CharField(max_length=12, null=True, blank=True)
     orderer_location = models.CharField(max_length=200, null=True, blank=True)
+    orderer_email = models.CharField(max_length=200, null=True, blank=True)
     ordered = models.BooleanField(default=False)
 
     sent = models.BooleanField(default=False)

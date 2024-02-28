@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.db.models import Count
-from .utils import send_registration_confirmation_email
+from .utils import send_registration_confirmation_email, send_product_sent_email
 import os
 
 
@@ -54,21 +54,19 @@ def register(request):
                 form.add_error('terms_checkbox', "Kérjük fogadd el a felhasználói feltételeket!")
                 return render(request, 'account/regisztracio.html', {'form': form})
 
+            if User.objects.filter(email=email).exists():
+                form.add_error('email', "Ezzel az email címmel már regisztráltak!")
+                return render(request, 'account/regisztracio.html', {'form': form})
             try:
                 user = User.objects.create_user(username=username, email=email, password=password)
                 customer = Customer.objects.create(user=user, name=username, email=email)
                 send_registration_confirmation_email(email)
                 login(request, user)
 
-            except IntegrityError as e:
-                if 'UNIQUE constraint' in str(e) and 'username' in str(e):
-                    form.add_error('username', "This username is already registered.")
-                elif 'UNIQUE constraint' in str(e) and 'email' in str(e):
-                    form.add_error('email', "This email is already registered.")
-                else:
-                    form.add_error(None, "An error occurred. Please try again.")
+            except IntegrityError:
+                form.add_error('username', "Ezzel a felhasználóval már regisztráltak.")
                 return render(request, 'account/regisztracio.html', {'form': form})
-            
+                        
             return redirect('shop')
     else:
         form = RegistrationForm()
@@ -164,5 +162,5 @@ def send_order(request, product_id):
         product = Product.objects.get(id=product_id)
         product.sent = True
         product.save()
-        
+        send_product_sent_email(product)
         return redirect('fiok')

@@ -42,6 +42,7 @@
                         <input type="text" name="orderer_phone" value="{{ customer.Telefonszám }}" pattern="[0-9+]*" maxlength="25">
                         <label>Szállítási cím:</label>
                         <input type="text" name="orderer_location" value="{{ customer.Lakcím }}">
+                        <input type="text" name="orderer_email" value="{{ customer.email }}" style="display: none;">
                         <button type="submit" class="user-btn">Megrendelés</button>
                     </div>
                 </form>

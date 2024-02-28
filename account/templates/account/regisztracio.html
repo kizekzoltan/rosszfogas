@@ -59,6 +59,7 @@
             <a class="btn btn-primary btn-rounded custom-btn" href="{% url 'bejelentkezes' %}">Bejelentkezés</a>
         </div>
         {{ form.email }}
+        {{ form.email.errors }}
         {{ form.username }}
         {{ form.username.errors }}
         {{ form.password }}
