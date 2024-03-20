@@ -29,6 +29,7 @@
                         {% csrf_token %}
                         <label for="title">Cím:</label>
                         <input type="text" id="title" name="title">
+                        {{ form.title.errors }}
                         <label for="title">Bővebb leírás:</label>
                         <input type="text" id="leiras" name="leiras">
                         <button type="submit" class="user-btn">Közzététel</button>
