@@ -51,7 +51,8 @@
 
 
 <div class="row">
-    <form id="form" method="post" action="{% url 'hirdetes_letrehozasa' %}" enctype="multipart/form-data">
+    {% if not customer.banned_ad %}
+        <form id="form" method="post" action="{% url 'hirdetes_letrehozasa' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col-lg-8 mx-auto" style="margin-top: 20px;">
             <div class="box-element" id="form-wrapper">
@@ -103,7 +104,7 @@
                 <div id="user-info" class="container">
                     <div class="form-field">
                         <label for="{{ form.image.id_for_label }}"></label>
-                        {{ form.image }}
+                        <input type="file" id="{{ form.image.id_for_label }}" name="image" accept="image/*" onchange="validateImageDimensions(this)">
                         {% for error in form.image.errors %}
                             <span class="error" style="color: red;"><strong>{{ error }}</strong></span>
                         {% endfor %}
@@ -117,6 +118,20 @@
             </div>
         </div>
     </form>
+    {% elif customer.banned_ad == True %}
+        <div class="col-lg-8 mx-auto" style="margin-top: 20px;">
+            <div class="box-element" id="form-wrapper">
+                <div id="user-info">
+                    <br>
+                    <h2 style="text-align: center;"><strong>Hirdetés feladástól <span style="color: red"><b>el vagy tiltva!</b></span></strong></h2>
+                    <br>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+
 </div>
 
 {% endblock %}
@@ -124,17 +139,34 @@
 {% block scripts %}
 <script>
     document.getElementById("{{ form.image.id_for_label }}").addEventListener("change", function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const imagePreview = document.getElementById("image-preview");
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = "block";
-                imagePreview.style.marginRight = "3vh";
-            }
-            reader.readAsDataURL(file);
-        }
-    });
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const width = this.width;
+                const height = this.height;
+                const minWidth = 600;  // Set your minimum width here
+                const maxWidth = 3024; // Set your maximum width here
+                const minHeight = 200; // Set your minimum height here
+                const maxHeight = 4032; // Set your maximum height here
+
+                if (width >= minWidth && width <= maxWidth && height >= minHeight && height <= maxHeight) {
+                    const imagePreview = document.getElementById("image-preview");
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block";
+                    imagePreview.style.marginRight = "3vh";
+                } else {
+                    alert("A kép minimum felbontása: " + minWidth + "x" + minHeight + ", és maximum felbontása: " + maxWidth + "x" + maxHeight + ". Kérem töltsön fel egy másik képet!");
+                    event.target.value = ''; // Clear the file input
+                }
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
 </script>
+
 {% endblock %}

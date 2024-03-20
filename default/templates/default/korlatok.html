@@ -1,0 +1,66 @@
+{% extends "default/layout.html" %}
+{% load static %}
+
+{% block title %} Korlátozások {% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="row">
+    <div class="col-lg-9 mx-auto" style="margin-top: 20px;">
+        <div class="box-element" id="form-wrapper">
+            <div id="user-info profile-info">
+                <br>
+                <h2 style="text-align: center;"><strong>Felhasználók listája:</strong></h2>
+                <br>
+                <form method="GET" action="{% url 'search_users' %}" style="display: flex;">
+                    <input type="text" name="search" placeholder="Felhasználó/email cím keresése">
+                    <button type="submit" class="user-btn" style="margin-left: auto;">Keresés</button>
+                </form>
+                <h3><strong></strong></h3>
+
+                {% for customer in customers %}
+                    <hr>
+                    {{ customer.name }} - {{ customer.email }}
+                    <p></p>
+                    <form method="post" class="ban-form" action="{% url 'ban' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="customer_id" value="{{ customer.id }}">
+                        {% if not customer.banned_ad %}
+                            <button class="delete-btn" type="submit" name="ban_type" value="sale" style="margin-right: 10px">Tiltás hirdetéstől</button>
+                        {% else %}
+                            <button class="user-btn" type="submit" name="ban_type" value="unsale" style="margin-right: 10px">Tiltás levétele a hirdetéstől</button>
+                        {% endif %}
+                        {% if not customer.banned_forum %}
+                            <button class="delete-btn" type="submit" name="ban_type" value="forum" style="margin-right: 10px">Tiltás Fórumról</button>
+                        {% else %}
+                            <button class="user-btn" type="submit" name="ban_type" value="unforum">Tiltás levétele a Fórumról</button>
+                        {% endif %}
+                    </form>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+    {# Ide jönnek a szkriptek, ha esetleg kellene egyedi csak ehhez az oldalhoz #}
+{% endblock %}

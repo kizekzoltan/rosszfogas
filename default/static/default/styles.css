@@ -1,21 +1,31 @@
 body {
-  background-color: hsl(0, 0%, 98%);
-  margin: 0;
-  padding-bottom: 150px;
+    background-color: hsl(0, 0%, 98%);
+    margin: 0;
+    min-height:100vh;
+    flex: 1;
+    padding: 0;
+    padding-bottom: 200px;
+    position: relative;
 }
 
-.form-control{
-    height: 50px;
+.footer {
+    background-color: #213144;
+    color: #fff;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-footer {
-  bottom: 0;
-  height: 100px
+.logofooter {
+    width: 100px;
+    height: auto;
 }
-
 html {
   position: relative;
-  min-height: 100%;
+  height: 100%;
 }
 
 h1,
@@ -60,6 +70,12 @@ td {
     width: auto;
     display: inline-block;
     margin-left: 15vh;
+}
+
+@media only screen and (max-width: 768px) {
+    #logo2 {
+        margin-right: 100px;
+    }
 }
 
 #cart-icon {
@@ -503,7 +519,7 @@ textarea {
 
 .rolunkimg {
     position: absolute;
-    object-fit: cover;
+    object-fit: fill;
     width: 100%;
     height: 100%;
     top: 0;
@@ -528,6 +544,7 @@ textarea {
     opacity: 0;
     max-width: 80%;
     transition: opacity .3s ease-out;
+    color: black;
 }
 
 .rolunkp {
@@ -548,7 +565,7 @@ textarea {
 
 .cardrolunk:hover .rolunkimg {
     transition: opacity .3s ease-in;
-    opacity: 1;
+    opacity: 0.3;
 }
 
 .cardrolunk:hover .rolunkp,

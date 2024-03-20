@@ -6,13 +6,13 @@ class HirdetesForm(forms.ModelForm):
         model = Product
         fields = ['name', 'price', 'feladocim', 'feladoorszag', 'kategoria', 'description', 'image', 'terms_checkbox']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Samsung Galaxy S21'}),
-            'price': forms.NumberInput(attrs={'class': 'input-field', 'placeholder': 'pl: 15000'}),
-            'feladocim': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 9012 Győr, Kalapos utca 12.'}),
-            'feladoorszag': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Magyarország'}),
+            'name': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Samsung Galaxy S21', 'required': 'required'}),
+            'price': forms.NumberInput(attrs={'class': 'input-field', 'placeholder': 'pl: 15000', 'required': 'required'}),
+            'feladocim': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: 9012 Győr, Kalapos utca 12.', 'required': 'required'}),
+            'feladoorszag': forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'pl: Magyarország', 'required': 'required'}),
             'kategoria': forms.Select(),
-            'description': forms.TextInput(attrs={'class': 'input-field', 'placeholder': ''}),
-            'image': forms.ClearableFileInput(attrs={'multiple': False}),
+            'description': forms.TextInput(attrs={'class': 'input-field', 'placeholder': '', 'required': 'required'}),
+            'image': forms.ClearableFileInput(attrs={'multiple': False, 'onchange': 'validateImageDimensions(this)'}),
         }
 
     def __init__(self, *args, **kwargs):

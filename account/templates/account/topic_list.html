@@ -20,7 +20,7 @@
                 <br>
                 <hr>
                 <h3><strong></strong></h3>
-
+                {% if customer.banned_forum == False %}
                 <h3>Hozz létre saját témát:</h3>
                 <button onclick="toggleForm()" class="user-btn">Téma létrehozása</button>
                 <div id="topicForm" style="display: none;">
@@ -28,25 +28,31 @@
                     <form method="post" action="{% url 'forumcucc' %}">
                         {% csrf_token %}
                         <label for="title">Cím:</label>
-                        <input type="text" id="title" name="title">
+                        <input type="text" id="title" name="title" maxlength="80" minlength="8">
                         <label for="title">Bővebb leírás:</label>
-                        <input type="text" id="leiras" name="leiras">
+                        <input type="text" id="leiras" name="leiras" maxlength="150" minlength="8">
                         <button type="submit" class="user-btn">Közzététel</button>
                     </form>
-                    <hr>
                 </div>
-                
+                {% endif %}
+                {% if customer.banned_forum == True %}
+                    <h3>Nem hozhatsz létre több témát!</h3>
+                <h4>A posztolástól <span style="color: red"><b>el vagy tiltva!</b></span></h4>
+                {% endif %}
+
                 <hr>
-                <h3><strong>Saját témák:</strong></h3> 
+                <br>
+                <hr>
+                <h3><strong>Saját témák:</strong></h3>
                 <hr>
                 <br>
                 {% for topic in topics %}
                 {% if topic.creator == current_user %}
-                    
+
                     <hr>
                     <a href="{% url 'topic_detail' topic.id %}" style="text-decoration: none; color: black;">
                         <li>
-                            <p>Cím: {{ topic.title }}</p>
+                            <h4>{{ topic.title }}</h4>
                             <p>{{topic.leiras}}</p>
                             </a>
                             <form action="{% url 'delete_topic' topic.id %}" method="post">
@@ -57,29 +63,37 @@
                         </li>
                         <br>
                     <hr>
-                    
+
                 {% endif %}
+
                 {% endfor %}
 
+                <br>
                 <hr>
-                <h3><strong>További témák:</strong></h3> 
+                <h3><strong>További témák:</strong></h3>
                 <hr>
                 <br>
 
                 {% for topic in topics %}
                 {% if topic.creator != current_user %}
-                
+
                     <hr>
                     <a href="{% url 'topic_detail' topic.id %}" style="text-decoration: none; color: black;">
                         <li>
-                            <p>Cím: {{ topic.title }}</p>
+                            <h4>{{ topic.title }}</h4>
                             <p>{{topic.leiras}}</p>
                             </a>
+                            {% if user.is_superuser %}
+                            <form action="{% url 'delete_topic' topic.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="delete-btn" type="submit">Téma törlése</button>
+                            </form>
+                            {% endif %}
                             <p style="float: right;">Létrehozó: {{ topic.creator }} / Létrehozva: {{ topic.created_at }} / Kommentek száma: {{ topic.num_comments }}</p>
                         </li>
                         <br>
                     <hr>
-                
+
                 {% endif %}
                 {% endfor %}
 

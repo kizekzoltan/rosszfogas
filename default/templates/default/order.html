@@ -12,9 +12,9 @@
     <div class="col-lg-9 mx-auto" style="margin-top: 20px;">
         <div class="box-element" id="form-wrapper">
             <div id="user-info profile-info">
-                
+
                 <hr>
-                <h3><strong>Rendelés adatai:</strong></h3> 
+                <h3><strong>Rendelés adatai:</strong></h3>
                 <hr>
                 <br>
                 <div class="profile-card profile-products">
@@ -39,9 +39,9 @@
                         <label>Felhasználóneved:</label>
                         <input type="text" name="orderer_name" value="{{ customer.name }}" readonly>
                         <label>Telefonszámod:</label>
-                        <input type="text" name="orderer_phone" value="{{ customer.Telefonszám }}" pattern="[0-9+]*" maxlength="25">
+                        <input type="text" name="orderer_phone" value="{{ customer.Telefonszám }}" pattern="[0-9+]*" maxlength="25" required>
                         <label>Szállítási cím:</label>
-                        <input type="text" name="orderer_location" value="{{ customer.Lakcím }}">
+                        <input type="text" name="orderer_location" value="{{ customer.Lakcím }}" required>
                         <input type="text" name="orderer_email" value="{{ customer.email }}" style="display: none;">
                         <button type="submit" class="user-btn">Megrendelés</button>
                     </div>

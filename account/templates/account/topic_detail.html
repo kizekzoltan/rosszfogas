@@ -3,9 +3,6 @@
 
 {% block sytlesheets %}
 <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
     .container {
         max-width: 800px;
         margin: 0 auto;
@@ -30,6 +27,9 @@
         border-radius: 5px;
         margin-bottom: 10px;
     }
+    .container {
+        word-wrap: break-word;
+    }
 </style>
 {% endblock %}
 
@@ -37,7 +37,10 @@
 
 {% block body %}
 
-
+{% if customer.banned_forum == False %}
+{% endif %}
+{% if customer.banned_forum == True %}
+{% endif %}
 
 
 
@@ -46,7 +49,7 @@
     <div class="col-lg-12 mx-auto" style="margin-top: 20px;">
         <div class="box-element" id="form-wrapper">
             <div id="user-info profile-info">
-                
+
 
 
 
@@ -64,19 +67,24 @@
                         <p>Létrehozó: {{ topic.creator }}</p>
                         <p>Létrehozva ekkor: {{ topic.created_at }}</p>
                     </div>
-                
-                    <hr>
-                        <h2>Kommentelj:</h2>
-                        <form method="post">
-                            {% csrf_token %}
-                            <label for="title">Tartalom:</label>
-                            <input type="text" id="content" name="content">
-                            <button type="submit" class="user-btn">Beküldés</button>
-                        </form>
-                    <hr>
-                        
 
-                        <!--  EZ megy felulre                             VÉGÜL VALAHOGY JÓ ÍGY IS AHOGY VAN DE HA ELBASZODNA ITTHAGYOM 
+                    <hr>
+                        {% if not customer.banned_forum %}
+                            <h2>Kommentelj:</h2>
+                            <form method="post">
+                                {% csrf_token %}
+                                <label for="title">Tartalom:</label>
+                                <input type="text" id="content" name="content" maxlength="75">
+                                <button type="submit" class="user-btn">Beküldés</button>
+                            </form>
+                        {% elif customer.banned_forum == True %}
+                            <h2>Nem kommentelhetsz!</h2>
+                            <h3>A kommenteléstől <span style="color: red"><b>el vagy tiltva!</b></span></h3>
+                        {% endif %}
+                    <hr>
+
+
+                        <!--  EZ megy felulre                             VÉGÜL VALAHOGY JÓ ÍGY IS AHOGY VAN DE HA ELBASZODNA ITTHAGYOM
                     <div id="topicForm" style="display: none;">
                     <h2>Hozz létre témát:</h2>
                     <form method="post" action="{% url 'forumcucc' %}">
@@ -93,9 +101,21 @@
 
 
                     <div class="comments">
-                        <h2>Kommentek: ({{ num_comments }})</h2>
+                        <h2 style="margin-bottom: 10px;">Kommentek: ({{ num_comments }})</h2>
                         {% for comment in comments %}
-                            <div class="comment">{{ comment.content }} - {{ comment.commenter }}</div>
+                            <div class="comment" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <div class="comment-content" style="flex-grow: 1;">
+                                    <p>{{ comment.content }} - {{ comment.commenter }}</p>
+                                </div>
+                                <div class="delete-button" style="margin-left: 10px;">
+                                    {% if comment.commenter == request.user or user.is_superuser %}
+                                        <form action="{% url 'delete_comment' comment.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button class="btn back-btn" type="submit"><i class='bx bx-trash'></i></button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>

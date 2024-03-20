@@ -16,5 +16,6 @@ urlpatterns = [
     path('forum', views.forum_cucc, name="forumcucc"),
     path('topic/<int:topic_id>/', views.topic_detail, name="topic_detail"),
     path('delete_topic/<int:topic_id>/', views.delete_topic, name='delete_topic'),
+    path('delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
     path('sending/<int:product_id>', views.send_order, name='send_order'),
 ]

@@ -4,7 +4,6 @@ from django.templatetags.static import static
 
 
 
-
 def send_registration_confirmation_email(email):
     subject = 'Sikeres regisztráció'
     message = f"""
@@ -28,7 +27,6 @@ def send_registration_confirmation_email(email):
     from_email = 'rosszfogas.noreply@gmail.com'
     recipient_list = [email]
     send_mail(subject, message, from_email, recipient_list, html_message=message)
-
 
 def send_order_confirmation_email(product):
     subject = 'Termékedet megrendelték'

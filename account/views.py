@@ -45,7 +45,7 @@ def register(request):
             password = form.cleaned_data['password']
             password_confirm = form.cleaned_data['password_confirm']
             terms_agreed = form.cleaned_data['terms_checkbox']
-            
+
             if password != password_confirm:
                 form.add_error('password_confirm', "A jelszavak nem egyeznek!")
                 return render(request, 'account/regisztracio.html', {'form': form})
@@ -66,11 +66,11 @@ def register(request):
             except IntegrityError:
                 form.add_error('username', "Ezzel a felhasználóval már regisztráltak.")
                 return render(request, 'account/regisztracio.html', {'form': form})
-                        
+
             return redirect('shop')
     else:
         form = RegistrationForm()
-        
+
     return render(request, 'account/regisztracio.html', {'form': form})
 
 def user_login(request):
@@ -110,15 +110,15 @@ def delete_customer(request, customer_id):
         user = User.objects.get(id=customer.user_id)
     except ObjectDoesNotExist:
         return HttpResponse("Error: User not found", status=404)
-    
+
     if request.method == 'POST':
         user.delete()
         customer.delete()
-        return redirect('regisztracio') 
+        return redirect('regisztracio')
     return redirect('fiok')
 
 def forum_cucc(request):
-    topics = Topic.objects.annotate(num_comments=Count('comment'))
+    topics = Topic.objects.annotate(num_comments=Count('comment')).order_by('-created_at')
     current_user = request.user
     customer = Customer.objects.get(user=current_user)
     if request.method == 'POST':
@@ -136,6 +136,8 @@ def topic_detail(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
     comments = Comment.objects.filter(topic=topic)
     num_comments = comments.count()
+    current_user = request.user
+    customer = Customer.objects.get(user=current_user)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -146,7 +148,7 @@ def topic_detail(request, topic_id):
             return redirect('topic_detail', topic_id=topic.id)
     else:
         form = CommentForm()
-    return render(request, 'account/topic_detail.html', {'topic': topic, 'comments': comments, 'form': form, 'num_comments': num_comments})
+    return render(request, 'account/topic_detail.html', {'customer': customer, 'topic': topic, 'comments': comments, 'form': form, 'num_comments': num_comments})
 
 
 def delete_topic(request, topic_id):
@@ -154,6 +156,14 @@ def delete_topic(request, topic_id):
     if request.method == 'POST':
         topic.delete()
         return redirect('forumcucc')
+    return redirect('forumcucc')
+
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.method == 'POST':
+        topic_id = comment.topic.id
+        comment.delete()
+        return redirect('topic_detail', topic_id=topic_id)
     return redirect('forumcucc')
 
 

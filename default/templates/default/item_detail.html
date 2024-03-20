@@ -23,7 +23,12 @@
                         <h4>Termék leírása: {{ product.description }}</h4>
                         <br>
                         <p>Ár: {{ product.price|floatformat:0|intcomma }} HUF</p>
-                        
+                        {% if product.kategoria != '--válasszon--' %}
+                            <p>Kategória: {{ product.kategoria }}</p>
+                        {% else %}
+                            <p>-A terméknek nem adtak kategóriát-</p>
+                        {% endif %}
+
                         {% if product.customer %}
                         {% if product.customer.Vezetéknév and product.customer.Keresztnév %}
                             <p>Feladó: {{ product.customer.Vezetéknév }} {{ product.customer.Keresztnév }}</p>
@@ -38,13 +43,13 @@
                                 <button type="submit" class="user-btn"><strong>Rendeld meg!</strong></button>
                             </a>
                         {% endif %}
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 
 
 {% endblock %}

@@ -21,6 +21,8 @@ class Customer(models.Model):
     Vezetéknév = models.CharField(max_length=200, null=True , default="")
     Keresztnév = models.CharField(max_length=200, null=True , default="")
     Lakcím = models.CharField(max_length=200, null=True, default="")
+    banned_ad = models.BooleanField(default=False)
+    banned_forum = models.BooleanField(default=False)
     Telefonszám = models.CharField(
         max_length=12,
         null=True,
@@ -49,9 +51,9 @@ class Product(models.Model):
     ]
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=50, null=True, blank=True)
+    name = models.CharField(max_length=80, null=True, blank=True)
     price = models.FloatField()
-    description = models.TextField(max_length=80)
+    description = models.TextField(max_length=150)
     feladocim = models.CharField(max_length=100, null=True, blank=True)
     feladoorszag = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='default/images/')
@@ -66,7 +68,7 @@ class Product(models.Model):
 
     sent = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
-    
+
     def __str__(self):
         return self.name
 
@@ -92,7 +94,7 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
         return total
-    
+
     @property
     def get_cart_items(self):
         orderitems = self.orderitem_set.all()
@@ -127,8 +129,8 @@ class ShippingAddress(models.Model):
 
 class Topic(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=20, null=True)
-    leiras = models.CharField(max_length=75, null=True, blank=True, default="Ehhez a témához nem tartozik leírás")
+    title = models.CharField(max_length=80, null=True)
+    leiras = models.CharField(max_length=150, null=True, blank=True, default="Ehhez a témához nem tartozik leírás")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

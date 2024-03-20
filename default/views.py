@@ -10,6 +10,8 @@ from .filters import ProductFilter
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from account.utils import send_order_confirmation_email
+from django.shortcuts import render
+from django.db.models import Q
 
 
 
@@ -21,12 +23,12 @@ def shop(request):
         customer = None
 
     products = Product.objects.all()
-    
+
     myFilter = ProductFilter(request.GET, queryset=products)
     products = myFilter.qs
-    
+
     context = {'products': products, 'customer': customer, 'myFilter': myFilter}
-    
+
     return render(request, 'default/shop.html', context)
 
     context = {'items':items, 'order':order}
@@ -87,3 +89,38 @@ def received_product(request, product_id):
         product.delete()
         return redirect('orders')
     return redirect('orders')
+
+def korlatok(request):
+    if not request.user.is_superuser:
+        return redirect('shop')
+    customers = Customer.objects.all()
+    return render(request, 'default/korlatok.html', {'customers': customers})
+
+def search_users(request):
+    search_query = request.GET.get('search')
+    if search_query:
+        customers = Customer.objects.filter(Q(name__icontains=search_query) | Q(email__icontains=search_query))
+    else:
+        customers = Customer.objects.all()
+    return render(request, 'default/korlatok.html', {'customers': customers})
+
+
+def ban(request):
+    if request.method == 'POST':
+        customer_id = request.POST.get('customer_id')
+        ban_type = request.POST.get('ban_type')
+        customer = Customer.objects.get(pk=customer_id)
+
+        if ban_type == 'sale':
+            customer.banned_ad = True
+            customer.save()
+        elif ban_type == 'forum':
+            customer.banned_forum = True
+            customer.save()
+        elif ban_type == 'unsale':
+            customer.banned_ad = False
+            customer.save()
+        elif ban_type == 'unforum':
+            customer.banned_forum = False
+            customer.save()
+    return redirect('korlatok')
